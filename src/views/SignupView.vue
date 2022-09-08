@@ -1,11 +1,17 @@
 <template>
+  <header>
+
+  </header>
+
   <div class="signup-form">
-    <h3>Create a personal account</h3>
-    <div class="img-wrapper">
-      <img class="signup-img" src="" alt="">
+    <h3 class="center">Create a personal account</h3>
+    <div class="img-wrapper center">
+      <img class="signup-img" src="../image/uploaded-icon.png" alt="">
+
     </div>
-    <span>Upload profile photo</span>
-    <div class="signup-box">
+    <span class="center">Upload
+      profile photo</span>
+    <div class="signup-box center">
       <div class="signup-box--info">
         <p>User Name</p>
         <input type="text">
@@ -22,9 +28,8 @@
         <p>Confirm Password</p>
         <input type="text">
       </div>
-      <button type="button">Create</button>
     </div>
-
+    <button class="mt-1 center" type="button">Create</button>
   </div>
 </template>
 
@@ -35,5 +40,39 @@ export default {
 </script>
 
 <style scoped>
+.signup-form {
+  margin: 0 auto;
+  width: 60%;
+  max-width: 1120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.img-wrapper {
+  width: 220px;
+  height: 220px;
+}
+
+.center {
+  align-self: center;
+}
+
+.mt-1 {
+  margin-top: 16px;
+}
+
+img {
+  width: 100%;
+}
+
+.signup-box {
+  width: 500px;
+}
+
+.signup-box--info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 </style>

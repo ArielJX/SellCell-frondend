@@ -43,7 +43,7 @@ export default {
 .signup-form {
   margin: 0 auto;
   width: 60%;
-  max-width: 1120px;
+  max-width: 680px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,12 +67,20 @@ img {
 }
 
 .signup-box {
-  width: 500px;
+  width: 360px;
 }
 
 .signup-box--info {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+button {
+  color: white;
+  background-color: #1950DA;
+  border: none;
+  border-radius: 2px;
+  padding: 0.5em 2em;
 }
 </style>

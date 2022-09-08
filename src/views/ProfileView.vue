@@ -18,7 +18,7 @@
                             <span>Auckland</span>
                             <span>Listed: Thur, 1 Sep</span>
                         </div>
-                        <div class="subtitle-container">
+                        <div class="subtitle-container mb-2">
                             <h4>Iphone 13 pro, 99% new</h4>
                         </div>
                         <div class="subtitle-container underline">
@@ -26,8 +26,8 @@
                             <p>Price by negotiation</p>
                         </div>
                         <div class="subtitle-container">
-                            <button id="profile-view-button" type="button">View</button>
-                            <button id="profile-delete-button" type="button">Delete</button>
+                            <button id="profile-view-button" class="blue-button" type="button">View</button>
+                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
                         </div>
                     </div>
                     <div class="item-box">
@@ -38,7 +38,7 @@
                             <span>Auckland</span>
                             <span>Listed: Thur, 1 Sep</span>
                         </div>
-                        <div class="subtitle-container">
+                        <div class="subtitle-container mb-2">
                             <h4>Iphone 13 pro, 99% new</h4>
                         </div>
                         <div class="subtitle-container underline">
@@ -46,8 +46,8 @@
                             <p>Price by negotiation</p>
                         </div>
                         <div class="subtitle-container">
-                            <button id="profile-view-button" type="button">View</button>
-                            <button id="profile-delete-button" type="button">Delete</button>
+                            <button id="profile-view-button" class="blue-button" type="button">View</button>
+                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
                         </div>
                     </div>
                     <div class="item-box">
@@ -58,7 +58,7 @@
                             <span>Auckland</span>
                             <span>Listed: Thur, 1 Sep</span>
                         </div>
-                        <div class="subtitle-container">
+                        <div class="subtitle-container mb-2">
                             <h4>Iphone 13 pro, 99% new</h4>
                         </div>
                         <div class="subtitle-container underline">
@@ -66,8 +66,8 @@
                             <p>Price by negotiation</p>
                         </div>
                         <div class="subtitle-container">
-                            <button id="profile-view-button" type="button">View</button>
-                            <button id="profile-delete-button" type="button">Delete</button>
+                            <button id="profile-view-button" class="blue-button" type="button">View</button>
+                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -228,6 +228,10 @@ img {
     width: 8%;
 }
 
+.mb-2 {
+    margin-bottom: 1.5em;
+}
+
 h3 {
     font-size: 28px;
 }
@@ -253,5 +257,21 @@ span {
 button {
     height: 24px;
     margin: auto 6px;
+}
+
+.blue-button {
+    color: white;
+    background-color: #1950DA;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 1.5em;
+}
+
+.white-button {
+    color: #1950DA;
+    background: white;
+    border: #1950DA 1px solid;
+    border-radius: 4px;
+    padding: 4px 1em;
 }
 </style>

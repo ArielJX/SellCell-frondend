@@ -7,7 +7,7 @@
             <div class="border-container">
                 <div class="title-container">
                     <h3>Sell items Listings</h3>
-                    <button id="profile-list-button" class="white-button" type="button">List new item</button>
+                    <button id="profile-list-button" class="white-button" type="button" @click="$router.push('listProduct')">List new item</button>
                 </div>
                 <div class="listing-box column-3">
                     <div class="item-box">
@@ -26,7 +26,7 @@
                             <p>Price by negotiation</p>
                         </div>
                         <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button">View</button>
+                            <button id="profile-view-button" class="blue-button" type="button" @click="$router.push('product')">View</button>
                             <button id="profile-delete-button" class="white-button" type="button">Delete</button>
                         </div>
                     </div>

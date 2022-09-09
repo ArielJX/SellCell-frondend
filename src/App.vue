@@ -13,7 +13,6 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/profile">Profile</RouterLink>
       </div>
     </nav>
-
   </header>
 
   <RouterView />

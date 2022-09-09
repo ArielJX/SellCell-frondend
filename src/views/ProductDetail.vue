@@ -227,16 +227,16 @@ a:active {
 }
 
 #slider-image-2:target~.image-holder {
-    left: -800px;
+    left: -500px;
 }
 
 #slider-image-3:target~.image-holder {
-    left: -1600px;
+    left: -1000px;
 }
 
 .button-holder {
     position: relative;
-    top: -31px;
+    top: -60px;
 }
 
 

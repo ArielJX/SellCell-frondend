@@ -9,7 +9,6 @@ import { RouterLink, RouterView } from 'vue-router'
       <img src="../public/image/Screen Shot 2022-09-08 at 1.37.44 PM.png" alt="logo">
       <div class="nav-link">
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/product">Product Detail</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
         <RouterLink to="/profile">Profile</RouterLink>

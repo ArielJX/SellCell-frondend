@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import listProductPage from '../../components/listProductPage.vue';
+import listProductPage from '../../components/savedProduct.vue';
     
 export default {
 components: { listProductPage }, 

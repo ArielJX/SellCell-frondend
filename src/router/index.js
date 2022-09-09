@@ -18,8 +18,6 @@ const router = createRouter({
       path: '/product',
       name: 'product',
       component: () => import('../views/ProductDetail.vue')
-<<<<<<< HEAD
-=======
     },
     {
       path: '/login',
@@ -35,7 +33,6 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: () => import('../views/ProfileView.vue')
->>>>>>> ariel
     }
   ]
 })

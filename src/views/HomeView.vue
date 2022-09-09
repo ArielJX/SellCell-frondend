@@ -1,13 +1,9 @@
 <script setup>
-<<<<<<< HEAD
 <main>
 
 </main>
-=======
->>>>>>> ariel
 </script>
 
-</script>
   
 <template>
   <main>

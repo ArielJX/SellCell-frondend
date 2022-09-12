@@ -92,7 +92,7 @@ components: { listProductPage },
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .product-list {
     text-align: center;
     padding: 2em 0;

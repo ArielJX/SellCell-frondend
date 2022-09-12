@@ -30,7 +30,7 @@ export default {
 
 <style scoped>
 .login-form {
-    margin: 0 auto;
+    margin: 0 auto 3rem auto;
     width: 60%;
     max-width: 800px;
     display: flex;
@@ -73,5 +73,9 @@ button {
     border: none;
     border-radius: 4px;
     padding: 0.5em 2em;
+}
+
+input {
+    height: 1.5rem;
 }
 </style>

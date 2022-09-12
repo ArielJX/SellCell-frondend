@@ -4,17 +4,18 @@
 
   
 <template>
-  <header class="header">
+  <!-- <header class="header">
     <a href="index.html" class="logo"><img src="src/img/SellCell.png" alt=""> </a>
     <nav class="navbar">
-      <a href="#home">Home</a>
+      <a href="../HomeView.vue">Home</a>
       <a href="#about">About</a>
-      <a href="#sell">Sell</a>
-      <a href="#login">Login</a>
+      <a href="../listProductPage.vue">Sell</a>
+      <a href="../LoginView.vue">Login</a>
     </nav>
-  </header>
+  </header> -->
 
-  <body>
+  <!-- <body> -->
+  <main>
     <div class="header-container">
       <div class="header-container__left">
         <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
@@ -126,11 +127,12 @@
       </div>
       <img src="src/img/strip-experts.png" alt="">
     </div>
-  </body>
+  </main>
+  <!-- </body>
   <footer>
     <div class="footer"></div>
     <p>Footer</p>
-  </footer>
+  </footer> -->
 </template>
 
 <style lang="scss">
@@ -191,76 +193,76 @@ $white: white;
   color: $main-blue;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 3rem 10%;
-  z-index: 1000;
-  background: #ffffff;
+// .header {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   padding: 3rem 10%;
+//   z-index: 1000;
+//   background: #ffffff;
 
-  .navbar a {
-    margin: 0 3rem;
-    font-size: 1.7rem;
-    color: black;
-  }
+//   .navbar a {
+//     margin: 0 3rem;
+//     font-size: 1.7rem;
+//     color: black;
+//   }
 
-  img {
-    width: 100px;
-  }
-}
+//   img {
+//     width: 100px;
+//   }
+// }
 
-body {
+main {
   padding-top: 13rem;
 }
 
-.navbar {
-  margin: 0 3rem;
-  font-size: 1.7rem;
-}
+// .navbar {
+//   margin: 0 3rem;
+//   font-size: 1.7rem;
+// }
 
-.header-container {
-  .btn__sign-up {
-    @include btn-theme
-  }
+// .header-container {
+//   .btn__sign-up {
+//     @include btn-theme
+//   }
 
-  position:relative;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 30vh;
-  display: flex;
-  justify-content: space-between;
+//   position:relative;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 90%;
+//   height: 30vh;
+//   display: flex;
+//   justify-content: space-between;
 
-  .header-container__left {
-    width: 50%;
-    padding-left: 50px;
-    padding-top: 15rem;
+//   .header-container__left {
+//     width: 50%;
+//     padding-left: 50px;
+//     padding-top: 15rem;
 
-    .header-headline {
-      align-content: center;
-      padding-right: 20px;
-    }
+//     .header-headline {
+//       align-content: center;
+//       padding-right: 20px;
+//     }
 
-    p {
-      font-size: 15px;
-    }
-  }
+//     p {
+//       font-size: 15px;
+//     }
+//   }
 
-  .header-container__right {
-    width: 50%;
+//   .header-container__right {
+//     width: 50%;
 
-    img {
-      width: 100%;
-      object-fit: cover;
-    }
+//     img {
+//       width: 100%;
+//       object-fit: cover;
+//     }
 
-  }
-}
+//   }
+// }
 
 .search-bar {
   padding: 20px;
@@ -430,12 +432,12 @@ body {
   }
 }
 
-.footer {
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  z-index: -100;
-  text-align: center;
-}
+// .footer {
+//   width: 100%;
+//   position: fixed;
+//   left: 0;
+//   bottom: 0;
+//   z-index: -100;
+//   text-align: center;
+// }
 </style>

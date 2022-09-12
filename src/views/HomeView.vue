@@ -4,17 +4,6 @@
 
   
 <template>
-  <!-- <header class="header">
-    <a href="index.html" class="logo"><img src="src/img/SellCell.png" alt=""> </a>
-    <nav class="navbar">
-      <a href="../HomeView.vue">Home</a>
-      <a href="#about">About</a>
-      <a href="../listProductPage.vue">Sell</a>
-      <a href="../LoginView.vue">Login</a>
-    </nav>
-  </header> -->
-
-  <!-- <body> -->
   <main>
     <div class="header-container">
       <div class="header-container__left">
@@ -128,11 +117,6 @@
       <img src="src/img/strip-experts.png" alt="">
     </div>
   </main>
-  <!-- </body>
-  <footer>
-    <div class="footer"></div>
-    <p>Footer</p>
-  </footer> -->
 </template>
 
 <style lang="scss">
@@ -156,7 +140,7 @@ $white: white;
   text-align: center;
 
   &:hover {
-    background: $background-blue;
+    background: $main-blue;
   }
 }
 
@@ -193,76 +177,28 @@ $white: white;
   color: $main-blue;
 }
 
-// .header {
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-between;
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   padding: 3rem 10%;
-//   z-index: 1000;
-//   background: #ffffff;
 
-//   .navbar a {
-//     margin: 0 3rem;
-//     font-size: 1.7rem;
-//     color: black;
-//   }
-
-//   img {
-//     width: 100px;
-//   }
-// }
-
-main {
-  padding-top: 13rem;
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  &__left {
+    width: 600px;
+    padding-left: 6em;
+  }
+  &__right {
+    width: 600px;
+    height: 400px;
+    img {
+      width: 600px;
+      height: 400px;
+    }
+  }
+  .btn__sign-up {
+    @include btn-theme
+  }
 }
 
-// .navbar {
-//   margin: 0 3rem;
-//   font-size: 1.7rem;
-// }
-
-// .header-container {
-//   .btn__sign-up {
-//     @include btn-theme
-//   }
-
-//   position:relative;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   width: 90%;
-//   height: 30vh;
-//   display: flex;
-//   justify-content: space-between;
-
-//   .header-container__left {
-//     width: 50%;
-//     padding-left: 50px;
-//     padding-top: 15rem;
-
-//     .header-headline {
-//       align-content: center;
-//       padding-right: 20px;
-//     }
-
-//     p {
-//       font-size: 15px;
-//     }
-//   }
-
-//   .header-container__right {
-//     width: 50%;
-
-//     img {
-//       width: 100%;
-//       object-fit: cover;
-//     }
-
-//   }
-// }
 
 .search-bar {
   padding: 20px;
@@ -270,7 +206,6 @@ main {
   height: 10rem;
   background-color: $main-blue;
   position: relative;
-  margin: 80px auto 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -432,12 +367,5 @@ main {
   }
 }
 
-// .footer {
-//   width: 100%;
-//   position: fixed;
-//   left: 0;
-//   bottom: 0;
-//   z-index: -100;
-//   text-align: center;
-// }
+
 </style>

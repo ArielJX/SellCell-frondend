@@ -7,7 +7,7 @@ import { RouterLink, RouterView } from 'vue-router'
     <nav>
       <img src="../src/image/logo.png" alt="logo">
       <div class="nav-link">
-        <RouterLink to="/home">Home</RouterLink>
+        <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
         <RouterLink to="/profile">Profile</RouterLink>
       </div>
@@ -59,7 +59,7 @@ a:hover {
 footer {
   height: 80px;
   width: 100%;
-  background-color: #13305F;
+  background-color: #003489;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 18px;
   color: white;

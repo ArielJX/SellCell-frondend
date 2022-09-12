@@ -41,7 +41,7 @@ export default {
 
 <style scoped>
 .signup-form {
-  margin: 0 auto;
+  margin: 0 auto 3rem auto;
   width: 60%;
   max-width: 680px;
   display: flex;
@@ -82,5 +82,9 @@ button {
   border: none;
   border-radius: 2px;
   padding: 0.5em 2em;
+}
+
+input {
+  height: 1.5rem;
 }
 </style>

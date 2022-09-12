@@ -2,7 +2,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 
 </script>
-
 <template>
   <header>
     <nav>
@@ -10,12 +9,10 @@ import { RouterLink, RouterView } from 'vue-router'
       <div class="nav-link">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/profile">Profile</RouterLink>        
+        <RouterLink to="/profile">Profile</RouterLink>
       </div>
     </nav>
-
   </header>
-
   <RouterView />
 
   <footer>
@@ -33,7 +30,6 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
-
 img {
   width: 200px;
 }
@@ -63,7 +59,7 @@ a:hover {
 footer {
   height: 80px;
   width: 100%;
-  background-color: #13305F;
+  background-color: #003489;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 18px;
   color: white;
@@ -85,5 +81,4 @@ li {
 i {
   padding-right: 2em;
 }
-
 </style>

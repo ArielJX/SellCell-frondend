@@ -1,14 +1,14 @@
 <template>
     <div class="login-form">
-        <h3 class="center">Log In</h3>
+        <h1 class="center">Log In</h1>
 
         <div class="login-box center">
             <div class="login-box--info">
-                <p>User Name</p>
+                <label>User Name</label>
                 <input type="text">
             </div>
             <div class="login-box--info">
-                <p>Password</p>
+                <label>Password</label>
                 <input type="text">
             </div>
             <div class="info">
@@ -28,9 +28,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .login-form {
-    margin: 0 auto 3rem auto;
+    margin: 8em auto;
     width: 60%;
     max-width: 800px;
     display: flex;
@@ -38,16 +38,29 @@ export default {
     justify-content: center;
 }
 
+
 .center {
     align-self: center;
 }
 
 .mt-1 {
-    margin-top: 16px;
+    margin-top: 2em;
+}
+
+
+label {
+  font-size: 20px;
+}
+
+input {
+    height: 36px;
+    width: 400px;
+    margin-bottom: 2em;
 }
 
 .login-box {
-    width: 300px;
+    width: 400px;
+    margin-top: 2em;
 }
 
 .login-box--info {
@@ -62,20 +75,22 @@ export default {
     gap: 1em;
 }
 
-span,
-a {
-    margin: 8px;
+span, a {
+    margin: 8px 2px;
+    font-size: 18px;
+}
+
+a:hover {
+ color: red;
 }
 
 button {
-    color: white;
-    background-color: #1950DA;
-    border: none;
-    border-radius: 4px;
-    padding: 0.5em 2em;
-}
-
-input {
-    height: 1.5rem;
+  color: white;
+  background-color: #1950DA;
+  border: none;
+  border-radius: 2px;
+  padding: 1em 2em;
+  margin-bottom: 4em;
+  font-size: 16px;
 }
 </style>

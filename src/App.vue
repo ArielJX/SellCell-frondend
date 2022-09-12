@@ -2,7 +2,6 @@
 import { RouterLink, RouterView } from 'vue-router'
 
 </script>
-
 <template>
   <header>
     <nav>
@@ -14,7 +13,6 @@ import { RouterLink, RouterView } from 'vue-router'
       </div>
     </nav>
   </header>
-
   <RouterView />
 
   <footer>
@@ -31,6 +29,7 @@ import { RouterLink, RouterView } from 'vue-router'
   </footer>
 </template>
 
+<<<<<<< HEAD
 <style scoped>
 img {
   width: 200px;
@@ -80,7 +79,7 @@ li {
   list-style: none;
 }
 
-i {
+=======<style lang="scss">>>>>>>>darlene i {
   padding-right: 2em;
 }
 </style>

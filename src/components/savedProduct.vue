@@ -7,7 +7,6 @@
             <p class="nickName"><b>Descrioption:</b>{{ productData.description }}</p>
             <p class="nickName"><b>Location:</b>{{ productData.location }}</p>
         </div>
-        <button class="delete-btn" @click="$emit('deleteProduct', productData.id)" type="button">Delete</button>
     </div>
 </template>
 

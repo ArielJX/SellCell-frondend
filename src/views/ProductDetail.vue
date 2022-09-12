@@ -18,6 +18,7 @@
             <a href="#slider-image-3" class="slider-change"></a>
         </div>
     </div>
+    
     <div class="product-detail">
         <h1>Iphone X</h1>
         <h3>Details</h3>
@@ -92,22 +93,39 @@
             <input class="chat__box--input" type="text">
             <button class="send__button">Send</button>
         </form>
+        <!-- <savedProduct :product-data="productObject" /> -->
     </div>
+    {{$route.params.id}}
+    {{productObject.name}}
+    {{productObject.location}}
 </template>
 
 
 
 <script>
+    // import savedProduct from '../components/savedProduct.vue';
+
     export default {
+        // components: { savedProduct },
         data() {
             return {
-                editing: false
+                editing: false,
+                productObject: {},
             }
         },
         methods: {
             editPost() {
                 this.editing = true
-            }
+            },
+            async getSinglePost() {
+            const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`);
+            const data = await response.json();
+            this.productObject = data;
+            console.log(this.$route.params.id)
+        },
+        },
+        mounted() {
+            this.getSinglePost();
         }
     }
 </script>

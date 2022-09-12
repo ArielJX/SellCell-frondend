@@ -29,7 +29,6 @@ import { RouterLink, RouterView } from 'vue-router'
   </footer>
 </template>
 
-<<<<<<< HEAD
 <style scoped>
 img {
   width: 200px;
@@ -79,7 +78,7 @@ li {
   list-style: none;
 }
 
-=======<style lang="scss">>>>>>>>darlene i {
+i {
   padding-right: 2em;
 }
 </style>

@@ -38,17 +38,15 @@
                     <option value="Christchurch">Christchurch</option>
                 </select>
             </div>
-            <RouterLink @click="submitForm" :to="{name: 'product', params: {id: productId.id }}">Upload</RouterLink>
+            <button @click="submitForm" type="button">Upload</button>
         </form>
-        <!-- <savedProduct :product-data="productObject" /> -->
     </div>
 </template>
 
 <script>
-    // import savedProduct from '../components/savedProduct.vue';
 
 export default {
-    // components: { savedProduct },
+
     data() {
         return {
             name: null,
@@ -56,9 +54,6 @@ export default {
             price: null,
             description: null,
             location: null,
-            productArray: [],
-            
-            productId: {id:{}}
         };
     },
     methods: {
@@ -76,35 +71,16 @@ export default {
                 })
             });
             const data = await response.json();
-            // window.location = "http://127.0.0.1:5173/product";
-            this.getProductLists();
-            // this.getSinglePost(data._id);
-            this.productId.id = data._id;
-            console.log(this.productId.id)
-        },
-
-        async getProductLists() {
-            const response = await fetch("http://localhost:3000/products");
-            const data = await response.json();
-            this.productArray = data;
-        },
-        
-        
-
-        async deleteProduct(id) {
-            const response = await fetch(`http://localhost:3000/products/${id}`, {
-                method: "DELETE"
-            });
-            const data = await response.text();
+            const savedItemId = data._id;
+            this.$router.push({name: 'product', params: {id: savedItemId}});
         }
-    },
-    mounted() {
-        // this.submitForm();
+
     }
+
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 .product-list {
     text-align: center;
     padding: 2em 0;

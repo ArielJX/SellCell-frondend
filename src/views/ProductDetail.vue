@@ -1,81 +1,81 @@
 <template>
     <div class="information-box">
         <div class="slider-holder">
-        <span id="slider-image-1"></span>
-        <span id="slider-image-2"></span>
-        <span id="slider-image-3"></span>
-        <div class="image-holder">
-            <img src="https://i.ebayimg.com/images/g/YHEAAOSwE8xhxhIb/s-l500.jpg" class="slider-image"
-                style="width:500px; height: 500px" />
-            <img src="https://apollo-singapore.akamaized.net/v1/files/a3lu6gpelqn63-IN/image;s=850x0"
-                class="slider-image" style="width:500px; height: 500px" />
-            <img src="https://cellbuddy.in/wp-content/uploads/2021/09/Apple-iPhone-13-Smartphone-491997702-i-2-1200Wx1200H.jpeg"
-                class="slider-image" style="width:500px; height: 500px" />
-        </div>
-        <div class="button-holder">
-            <a href="#slider-image-1" class="slider-change"></a>
-            <a href="#slider-image-2" class="slider-change"></a>
-            <a href="#slider-image-3" class="slider-change"></a>
-        </div>
-    </div>
-    
-    <div class="product-detail">
-        <h1>Iphone X</h1>
-        <h3>Details</h3>
-        <div class="product-details">
-            <div v-if="!editing" class="detail-box">
-                <label for="name">Name: </label>
-                <p class="name">iphoneX</p>
+            <span id="slider-image-1"></span>
+            <span id="slider-image-2"></span>
+            <span id="slider-image-3"></span>
+            <div class="image-holder">
+                <img src="https://i.ebayimg.com/images/g/YHEAAOSwE8xhxhIb/s-l500.jpg" class="slider-image"
+                    style="width:500px; height: 500px" />
+                <img src="https://apollo-singapore.akamaized.net/v1/files/a3lu6gpelqn63-IN/image;s=850x0"
+                    class="slider-image" style="width:500px; height: 500px" />
+                <img src="https://cellbuddy.in/wp-content/uploads/2021/09/Apple-iPhone-13-Smartphone-491997702-i-2-1200Wx1200H.jpeg"
+                    class="slider-image" style="width:500px; height: 500px" />
             </div>
-            <div v-else class="detail-box">
-                <label for="name">Name: </label>
-                <input type="text" id="name">
-            </div>
-            <div v-if="!editing" class="detail-box">
-                <label for="brand">Brand: </label>
-                <p class="brand">iphone</p> 
-            </div>
-            <div v-else class="detail-box">
-                <label for="brand">Brand: </label>
-                <select name="brand" id="brand">
-                <option value="apple">Apple</option>
-                <option value="samsung">Samsung</option>
-                <option value="huawei">Huawei</option>
-                <option value="oppo">Oppo</option>
-                <option value="nokia">Nokia</option>
-            </select>
-            </div>
-            <div v-if="!editing" class="detail-box">
-                <label for="price">Price: </label>
-                <p class="price">1000</p>
-            </div>
-            <div v-else class="detail-box">
-                <label for="price">Price: </label>
-                <input type="text" name="" id="price">
+            <div class="button-holder">
+                <a href="#slider-image-1" class="slider-change"></a>
+                <a href="#slider-image-2" class="slider-change"></a>
+                <a href="#slider-image-3" class="slider-change"></a>
             </div>
         </div>
-        <h3>Description</h3>
-        <p v-if="!editing" class="description">phone 13 used for 3 years, in excellent condition. No scratches or previous damage. I still have 1 year of warrantee left with receipt. Please contact me if you have any questions. No negotiations. </p>
-        <textarea v-else id="description" cols="40" rows="7"></textarea>
-        <h3>Location</h3>
-        <p v-if="!editing" class="location">Auckland</p>
-        <select v-else name="location" id="location">
+
+        <div class="product-detail">
+            <h1>Iphone X</h1>
+            <h3>Details</h3>
+            <div class="product-details">
+                <div v-if="!editing" class="detail-box">
+                    <label for="name">Name: </label>
+                    <p class="name">{{productObject.name}}</p>
+                </div>
+                <div v-else class="detail-box">
+                    <label for="name">Name: </label>
+                    <input type="text" id="name" v-model="name">
+                </div>
+                <div v-if="!editing" class="detail-box">
+                    <label for="brand">Brand: </label>
+                    <p class="brand">{{productObject.brand}}</p>
+                </div>
+                <div v-else class="detail-box">
+                    <label for="brand">Brand: </label>
+                    <select name="brand" id="brand" v-model="brand">
+                        <option value="apple">Apple</option>
+                        <option value="samsung">Samsung</option>
+                        <option value="huawei">Huawei</option>
+                        <option value="oppo">Oppo</option>
+                        <option value="nokia">Nokia</option>
+                    </select>
+                </div>
+                <div v-if="!editing" class="detail-box">
+                    <label for="price">Price: </label>
+                    <p class="price">{{productObject.price}}</p>
+                </div>
+                <div v-else class="detail-box">
+                    <label for="price">Price: </label>
+                    <input type="text" name="" id="price" v-model="price">
+                </div>
+            </div>
+            <h3>Description</h3>
+            <p v-if="!editing" class="description">{{productObject.description}}</p>
+            <textarea v-else id="description" cols="40" rows="7" v-model="description"></textarea>
+            <h3>Location</h3>
+            <p v-if="!editing" class="location">{{productObject.location}}</p>
+            <select v-else name="location" id="location" v-model="location">
                 <option value="auckland">Auckland</option>
                 <option value="hamilton">Hamilton</option>
                 <option value="wellington">Wellington</option>
                 <option value="Christchurch">Christchurch</option>
             </select>
-        <div v-if="!editing" class="buttons">
-            <button @click="editPost" class="edit-button">Edit</button>
-            <button class="delete-button">Delete</button>
-        </div>
-        <div v-else class="buttons">
-            <button  class="save-button">Save</button>
-            <button @click="editing = false" class="cancel-button">Cancel</button>
+            <div v-if="!editing" class="buttons">
+                <button @click="editPost" class="edit-button" type="button">Edit</button>
+                <button class="delete-button" type="button" @click="deletePost">Delete</button>
+            </div>
+            <div v-else class="buttons">
+                <button class="save-button" @click="updatePost" type="button">Save</button>
+                <button @click="editing = false" class="cancel-button">Cancel</button>
+            </div>
         </div>
     </div>
-    </div>
-    
+
 
     <div class="chat__box">
         <h1>Question & Answer</h1>
@@ -93,69 +93,97 @@
             <input class="chat__box--input" type="text">
             <button class="send__button">Send</button>
         </form>
-        <!-- <savedProduct :product-data="productObject" /> -->
     </div>
-    {{$route.params.id}}
-    {{productObject.name}}
-    {{productObject.location}}
 </template>
 
 
 
 <script>
-    // import savedProduct from '../components/savedProduct.vue';
 
-    export default {
-        // components: { savedProduct },
-        data() {
-            return {
-                editing: false,
-                productObject: {},
-            }
+export default {
+
+    data() {
+        return {
+            editing: false,
+            name: null,
+            brand: null,
+            price: null,
+            description: null,
+            location: null,
+            productObject: {}
+        }
+    },
+    methods: {
+        editPost() {
+            this.editing = true
         },
-        methods: {
-            editPost() {
-                this.editing = true
-            },
-            async getSinglePost() {
+
+        async getSinglePost() {
             const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`);
             const data = await response.json();
             this.productObject = data;
-            console.log(this.$route.params.id)
         },
+
+        async updatePost() {
+            const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`, {
+                method: "PUT",
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify({
+                    name: this.name,
+                    brand: this.brand,
+                    price: this.price,
+                    description: this.description,
+                    location: this.location
+                })
+            });
+            const data = await response.json();
+            this.productObject = data;
+            console.log(this.productObject.name);
+            this.$router.push({ name: 'product', params: { id: this.$route.params.id } })
+            this.editing = false;
         },
-        mounted() {
-            this.getSinglePost();
+
+        async deletePost() {
+            const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`, {
+                method: "DELETE"
+            });
+            const data = await response.json();
+            this.$router.push({name: 'profile'});
         }
+    },
+    mounted() {
+        this.getSinglePost();
     }
+}
 </script>
 
 
 
-<style scoped>
-    .information-box {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 1000px;
-        padding:2em 2em 3em 2em;
-        margin: auto;
-    }
+<style lang="scss">
+.information-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+    padding: 2em 2em 3em 2em;
+    margin: auto;
+}
 
 
-    .detail-box {
-        display: flex;
-        align-items: center;
-        padding: 0.5em 0;
-    }
+.detail-box {
+    display: flex;
+    align-items: center;
+    padding: 0.5em 0;
+}
 
-    p {
-        font-size: 18px;
-        margin: 0;
-    }
+p {
+    font-size: 18px;
+    margin: 0;
+}
+
 .product-detail {
     width: 400px;
-}    
+}
 
 .buttons {
     width: 200px;
@@ -175,6 +203,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
 }
+
 .save-button {
     border: none;
     background-color: rgba(25, 80, 218, 1);
@@ -185,6 +214,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
 }
+
 .delete-button {
     border: none;
     background-color: #17A500;
@@ -195,6 +225,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
 }
+
 .cancel-button {
     border: none;
     background-color: #17A500;
@@ -205,6 +236,7 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     cursor: pointer;
 }
+
 .slider-holder {
     width: 500px;
     height: 500px;

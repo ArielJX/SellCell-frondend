@@ -29,7 +29,7 @@ import { RouterLink, RouterView } from 'vue-router'
   </footer>
 </template>
 
-<style scoped>
+<style lang="scss">
 img {
   width: 200px;
 }

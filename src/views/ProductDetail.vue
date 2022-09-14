@@ -79,6 +79,7 @@
 
     <div class="chat__box">
         <h1>Question & Answer</h1>
+        <div class="chat__content">
         <div class="chat__box--buyer">
             <img class="profile__img" src="https://wallpaperaccess.com/full/6295120.jpg">
             <p class="profile__comment">Hi does the phone come with a charger?</p>
@@ -88,10 +89,15 @@
             <p class="profile__comment">Yes, it does come with charger :)</p>
             <img class="profile__img" src="https://wallpaperaccess.com/full/3804420.jpg">
         </div>
+        <div class="realchat">
+            <messageContent v-for="message of messageArray" :message-data="message" :key="message.id" />
+        </div>
+        </div>
 
         <form class="chat__box--form">
-            <input class="chat__box--input" type="text">
-            <button class="send__button">Send</button>
+            <input class="chat__box--input" placeholder="username" type="text" name="username" v-model="username">
+            <input class="chat__box--input" placeholder="type message here" type="text" name="message" v-model="message" >
+            <button class="send__button" @click="submitMessage" type="button">Send</button>
         </form>
     </div>
 </template>
@@ -99,9 +105,9 @@
 
 
 <script>
-
+import messageContent from '../../components/messageContent.vue';
 export default {
-
+components: { messageContent },
     data() {
         return {
             editing: false,
@@ -110,7 +116,10 @@ export default {
             price: null,
             description: null,
             location: null,
-            productObject: {}
+            productObject: {},
+            username: null,
+            message: null,
+            messageArray: []
         }
     },
     methods: {
@@ -149,26 +158,46 @@ export default {
             });
             const data = await response.json();
             this.$router.push({name: 'profile'});
-        }
+        },
+        
+        async submitMessage() {
+            console.log("submit message");
+            const response = await fetch("http://localhost:3000/userMessage", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({
+                        username: this.username,
+                        message: this.message
+                    })
+                });
+            const data = await response.text();
+            this.getMessageLists();
+
+            },
+            async getMessageLists() {
+            const response = await fetch("http://localhost:3000/userMessage");
+            const data = await response.json();
+            this.messageArray = data;
     },
+    },
+    
     mounted() {
         this.getSinglePost();
+        this.getMessageLists();    
     }
 }
 </script>
 
 
-
-<style lang="scss">
-.information-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1000px;
-    padding: 2em 2em 3em 2em;
-    margin: auto;
-}
-
+<style lang="scss" scoped>
+    .information-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 1000px;
+        padding:2em 2em 3em 2em;
+        margin: auto;
+    }
 
 .detail-box {
     display: flex;
@@ -305,7 +334,7 @@ a:active {
     -moz-box-shadow: 3px 3px 5px 6px #ccc;
     -webkit-box-shadow: 3px 3px 5px 6px #ccc;
     box-shadow: 3px 3px 5px 6px #ccc;
-    height: 500px;
+    height: 550px;
     width: 1000px;
     margin: auto;
     margin-bottom: 4em;
@@ -343,9 +372,9 @@ h1 {
 }
 
 .chat__box--form {
-    position: relative;
-    left: 30%;
-    top: 28%;
+margin-left: 12em;
+margin-top: 1em;
+margin-bottom: 2em;
 }
 
 .send__button {
@@ -365,4 +394,11 @@ h1 {
     height: 30px;
     width: 260px;
 }
+
+.chat__content {
+  height: 400px;
+  width: 1000px;
+  overflow-y: scroll;
+}
+
 </style>

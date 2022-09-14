@@ -4,49 +4,91 @@
   </header>
 
   <div class="signup-form">
-    <h3 class="center">Create a personal account</h3>
+    <h2 class="center">Create a personal account</h2>
     <div class="img-wrapper center">
       <img class="signup-img" src="../image/uploaded-icon.png" alt="">
 
     </div>
-    <span class="center">Upload
-      profile photo</span>
+    <span class="center">Upload profile photo</span>
     <div class="signup-box center">
       <div class="signup-box--info">
-        <p>User Name</p>
-        <input type="text">
+        <label>User Name</label>
+        <input type="text" name="username" v-model="username">
       </div>
       <div class="signup-box--info">
-        <p>Email</p>
-        <input type="text">
+        <label>Email</label>
+        <input type="text" name="email" v-model="email">
       </div>
       <div class="signup-box--info">
-        <p>Password</p>
-        <input type="text">
+        <label>Password</label>
+        <input type="text" name="password" v-model="password">
       </div>
       <div class="signup-box--info">
-        <p>Confirm Password</p>
-        <input type="text">
+        <label>Confirm Password</label>
+        <input type="text" name="confirm_password" v-model="confirm_password">
       </div>
     </div>
-    <button class="mt-1 center" type="button">Create</button>
+    <button class="mt-1 center" @click="registerForm" type="button">Create</button>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  data() {
+        return {
+            username: null,
+            email: null,
+            password: null,
+            confirm_password: null,
+            registerArray: []
+            };
+},
+methods: {
+        async registerForm() {
+            console.log("register form");
+            const response = await fetch("http://localhost:3000/register", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({
+                        username: this.username,
+                        email: this.email,
+                        password:this.password,
+                        confirm_password:this.confirm_password
+                    })
+                });
+            const data = await response.text();
+                // window.location = "http://127.0.0.1:5173/login";
+            },
+            async getProfileLists() {
+            const response = await fetch("http://localhost:3000/register");
+            const data = await response.json();
+            this.registerArray = data;
+    },
+          }
+        }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .signup-form {
-  margin: 0 auto 3rem auto;
+  margin: 4em auto;
   width: 60%;
   max-width: 680px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+span {
+  margin-bottom: 4em;
+}
+
+input {
+  height: 36px;
+  margin-bottom: 2em;
+}
+
+label {
+  font-size: 20px;
 }
 
 .img-wrapper {
@@ -59,7 +101,7 @@ export default {
 }
 
 .mt-1 {
-  margin-top: 16px;
+  margin-top: 1em;
 }
 
 img {
@@ -81,10 +123,8 @@ button {
   background-color: #1950DA;
   border: none;
   border-radius: 2px;
-  padding: 0.5em 2em;
-}
-
-input {
-  height: 1.5rem;
+  padding: 1em 2em;
+  margin-bottom: 4em;
+  font-size: 16px;
 }
 </style>

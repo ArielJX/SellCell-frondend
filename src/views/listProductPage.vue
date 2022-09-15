@@ -72,7 +72,7 @@ export default {
             });
             const data = await response.json();
             const savedItemId = data._id;
-            this.$router.push({name: 'product', params: {id: savedItemId}});
+            this.$router.push({ name: 'product', params: { id: savedItemId } });
         }
 
     }

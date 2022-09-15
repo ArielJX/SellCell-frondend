@@ -102,6 +102,7 @@
 </template>
 
 <script>
+import listProduct from './components/profileItem.vue';
 export default {
 
 }

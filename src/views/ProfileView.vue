@@ -29,6 +29,7 @@
                         <div class="subtitle-container">
                             <button id="profile-view-button" class="blue-button" type="button"
                                 @click="$router.push('product')">View</button>
+<<<<<<< HEAD
                             <button id="profile-delete-button" class="white-button" type="button"
                                 @click="removeElement(key)">Delete</button>
                         </div>
@@ -72,6 +73,8 @@
                         </div>
                         <div class="subtitle-container">
                             <button id="profile-view-button" class="blue-button" type="button">View</button>
+=======
+>>>>>>> 854fe063c3080ebc5364bbc8df48d47b7c69d34c
                             <button id="profile-delete-button" class="white-button" type="button">Delete</button>
                         </div>
                     </div>
@@ -95,7 +98,11 @@
                             <button id="profile-delete-button" class="white-button" type="button">Delete</button>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <ProfileItem @delete-item="deleteProduct" v-for="product of productArray" :key="product.id" />
+=======
+                    <profileItem v-for="product of productArray" :product-data="product" :key="product.id" />
+>>>>>>> 854fe063c3080ebc5364bbc8df48d47b7c69d34c
                 </div>
             </div>
         </div>
@@ -128,6 +135,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import ProfileItem from "../../components/profileItem.vue";
 export default {
     components: {
@@ -139,11 +147,21 @@ export default {
             brand: null,
             price: null,
             description: null,
+=======
+import profileItem from '../../components/ProfileItem.vue';
+export default {
+    components: { profileItem },
+    data() {
+        return {
+            name: null,
+            price: null,
+>>>>>>> 854fe063c3080ebc5364bbc8df48d47b7c69d34c
             location: null,
             productArray: []
         };
     },
     methods: {
+<<<<<<< HEAD
         async getProduct() {
             const response = await fetch(`http://localhost:3000/products`);
             const data = await response.text();
@@ -167,6 +185,16 @@ export default {
     },
     mounted() {
         this.getProduct();
+=======
+        async getItem() {
+            const response = await fetch(`http://localhost:3000/products`);
+            const data = await response.json();
+            this.productArray = data;
+        }
+    },
+    mounted() {
+        this.getItem();
+>>>>>>> 854fe063c3080ebc5364bbc8df48d47b7c69d34c
     }
 }
 </script>
@@ -218,12 +246,15 @@ export default {
 
 /* .column-3 {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
-    grid-gap: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .item-box {
+    min-width: 220px;
+    max-width: 260px;
+    flex: 1 1 30%;
     border: 1px solid gainsboro;
     border-radius: 6px;
     padding-bottom: 1em;

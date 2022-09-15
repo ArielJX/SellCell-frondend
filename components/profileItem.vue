@@ -1,28 +1,28 @@
 <template>
-  <div class="columns-3">
-    <div class="item-box">
-      <div>
-        <img src="../src/image/iphone13.png" alt="">
-      </div>
-      <div class="subtitle-container">
-        <span>{{productData.location}}</span>
-        <span>Listed: Thur, 1 Sep</span>
-      </div>
-      <div class="subtitle-container mb-2">
-        <h4>{{productData.name}}</h4>
-        <h4>{{productData._id}}</h4>
-      </div>
-      <div class="subtitle-container">
-        <p class="font-blue">48 Watchers</p>
-        <p>{{productData.price}}</p>
-      </div>
-      <div class="subtitle-container">
-        <button id="profile-view-button" class="blue-button" type="button">View</button>
-        <button @click="$emit('deleteItem', productData.id)" id="profile-delete-button" class="white-button"
-          type="button">Delete</button>
-      </div>
+
+  <div class="item-box">
+    <div>
+      <img src="../src/image/iphone13.png" alt="">
+    </div>
+    <div class="subtitle-container">
+      <span>{{productData.location}}</span>
+      <span>Listed: Thur, 1 Sep</span>
+    </div>
+    <div class="subtitle-container mb-2">
+      <h4>{{productData.name}}</h4>
+      <!-- <h4>{{id}}</h4> -->
+    </div>
+    <div class="subtitle-container">
+      <p class="font-blue">48 Watchers</p>
+      <p>{{productData.price}}</p>
+    </div>
+    <div class="subtitle-container">
+      <button id="profile-view-button" class="blue-button" type="button">View</button>
+      <button @click="$emit('deleteItem', productData.id)" id="profile-delete-button" class="white-button"
+        type="button">Delete</button>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -43,13 +43,6 @@ export default {
 </script>
 
 <style scoped>
-.column-3 {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
 .item-box {
   min-width: 220px;
   max-width: 260px;

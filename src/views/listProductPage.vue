@@ -40,17 +40,13 @@
             </div>
             <button @click="submitForm" type="button">Upload</button>
         </form>
-        <h2>My listing</h2>
-        <listProductPage @delete-product="deleteProduct" v-for="product of productArray" :key="product.id"
-            :product-data="product" />
     </div>
 </template>
 
 <script>
-import listProductPage from '../../components/savedProduct.vue';
 
 export default {
-    components: { listProductPage },
+
     data() {
         return {
             name: null,
@@ -58,7 +54,6 @@ export default {
             price: null,
             description: null,
             location: null,
-            productArray: []
         };
     },
     methods: {
@@ -78,20 +73,10 @@ export default {
             const data = await response.json();
             const savedItemId = data._id;
             this.$router.push({ name: 'product', params: { id: savedItemId } });
-        },
+        }
 
-        // async getProductLists() {
-        //     const response = await fetch("http://localhost:3000/products");
-        //     const data = await response.json();
-        //     this.productArray = data;
-        // },
-        // async deleteProduct(id) {
-        //     const response = await fetch(`http://localhost:3000/products/${id}`, {
-        //         method: "DELETE"
-        //     });
-        //     const data = await response.text();
-        // }
     }
+
 }
 </script>
 

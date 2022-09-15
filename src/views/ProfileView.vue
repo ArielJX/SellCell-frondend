@@ -52,7 +52,7 @@
                             <button id="profile-delete-button" class="white-button" type="button">Delete</button>
                         </div>
                     </div>
-                    <profileItem />
+                    <profileItem v-for="product of productArray" :product-data="product" :key="product.id" />
                 </div>
             </div>
         </div>
@@ -97,12 +97,14 @@ export default {
         };
     },
     methods: {
-        async deleteItem(id) {
-            const response = await fetch(`http://localhost:3000/products/${id}`, {
-                method: "DELETE"
-            });
-            const data = await response.text();
+        async getItem() {
+            const response = await fetch(`http://localhost:3000/products`);
+            const data = await response.json();
+            this.productArray = data;
         }
+    },
+    mounted() {
+        this.getItem();
     }
 }
 </script>
@@ -152,18 +154,6 @@ export default {
     gap: 2rem;
 }
 
-/* .column-3 {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
-    grid-gap: 1em;
-}
-
-.item-box {
-    border: 1px solid gainsboro;
-    border-radius: 6px;
-    padding-bottom: 1em;
-} */
 .column-3 {
     width: 100%;
     display: flex;

@@ -29,9 +29,7 @@
                         <div class="subtitle-container">
                             <button id="profile-view-button" class="blue-button" type="button"
                                 @click="$router.push('product')">View</button>
-<<<<<<< HEAD
-                            <button id="profile-delete-button" class="white-button" type="button"
-                                @click="removeElement(key)">Delete</button>
+                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
                         </div>
                     </div>
                     <div class="item-box">
@@ -56,53 +54,8 @@
                                 @click="removeElement(key)">Delete</button>
                         </div>
                     </div>
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button">View</button>
-=======
->>>>>>> 854fe063c3080ebc5364bbc8df48d47b7c69d34c
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
-<<<<<<< HEAD
-                    <ProfileItem @delete-item="deleteProduct" v-for="product of productArray" :key="product.id" />
-=======
-                    <profileItem v-for="product of productArray" :product-data="product" :key="product.id" />
->>>>>>> 854fe063c3080ebc5364bbc8df48d47b7c69d34c
+                    <ProfileItem v-for="product of productArray" :product-data="product" :key="product.id" />
+
                 </div>
             </div>
         </div>
@@ -135,7 +88,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import ProfileItem from "../../components/profileItem.vue";
 export default {
     components: {
@@ -144,57 +96,31 @@ export default {
     data() {
         return {
             name: null,
-            brand: null,
             price: null,
-            description: null,
-=======
-import profileItem from '../../components/ProfileItem.vue';
-export default {
-    components: { profileItem },
-    data() {
-        return {
-            name: null,
-            price: null,
->>>>>>> 854fe063c3080ebc5364bbc8df48d47b7c69d34c
             location: null,
             productArray: []
         };
     },
     methods: {
-<<<<<<< HEAD
-        async getProduct() {
-            const response = await fetch(`http://localhost:3000/products`);
-            const data = await response.text();
-            this.productArray = data;
-            console.log(this.productArray)
-
-        },
-
-        async deleteProduct(id) {
-            const response = await fetch(`http://localhost:3000/products/${id}`, {
-                method: "DELETE"
-            });
-            const data = await response.text();
-
-            this.getProduct();
-        },
-
-        removeElement: function (index) {
-            this.$delete(this.items, index);
-        }
-    },
-    mounted() {
-        this.getProduct();
-=======
         async getItem() {
             const response = await fetch(`http://localhost:3000/products`);
             const data = await response.json();
             this.productArray = data;
-        }
+        },
+        // async deleteProduct(id) {
+        //     const response = await fetch(`http://localhost:3000/products/${id}`, {
+        //         method: "DELETE"
+        //     });
+        //     const data = await response.text();
+
+        //     this.getProduct();
+        // },
+        // removeElement: function (index) {
+        //     this.$delete(this.items, index);
+        // }
     },
     mounted() {
         this.getItem();
->>>>>>> 854fe063c3080ebc5364bbc8df48d47b7c69d34c
     }
 }
 </script>

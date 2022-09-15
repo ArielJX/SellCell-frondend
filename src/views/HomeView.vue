@@ -1,7 +1,27 @@
 <script>
   import ListItemHome from '../../components/listItemHome.vue';
     export default{
-
+      components: {ListItemHome},
+      data(){
+        return {
+          name: null,
+          brand: null,
+          price: null,
+          description: null,
+          location: null,
+          productObject: {},
+        }
+      },
+      methods: {
+      async getPost() {
+      const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`);
+      const data = await response.json();
+      this.productObject = data;
+        },
+      },
+      mounted() {
+        this.getPost();
+      }
     }
 </script>
 
@@ -62,28 +82,12 @@
       <div class="list-product-page">
         <div class="listing-box column-3">
           <div class="item-box">
-              <div>
-                  <img src="../image/iphone13.png" alt="">
-              </div>
-              <div class="subtitle-container">
-                  <span>Auckland</span>
-                  <span>Listed: Thur, 1 Sep</span>
-              </div>
-              <div class="subtitle-container mb-2">
-                  <h4>Iphone 13 pro, 99% new</h4>
-              </div>
-              <div class="subtitle-container underline">
-                  <p class="font-blue">48 Watchers</p>
-                  <p>Price by negotiation</p>
-              </div>
-              <div class="subtitle-container">
+              <listItemHome v-for="product of productArray" :key="product.id" :productData="product"/>
                   <button id="profile-view-button" class="blue-button" type="button" @click="$router.push('product')">View</button>
-                  <button id="profile-delete-button" class="white-button" type="button">Delete</button>
               </div>
           </div>
         </div>  
         <button class="btn__view-listing">Browse More Phones</button>
-      </div>
     </section>
 
     <div class="strip-banner__marketplace">

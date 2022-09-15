@@ -5,15 +5,14 @@
             <img src="../src/image/iphone13.png" alt="">
         </div>
         <div class="subtitle-container">
-            <span>{{location}}</span>
+            <span>{{productData.location}}</span>
             <span>Listed: Thur, 1 Sep</span>
         </div>
         <div class="subtitle-container mb-2">
-        <h4>{{name}}</h4>
+        <h4>{{productData.name}}</h4>
         </div>
         <div class="subtitle-container">
-        <p class="font-blue">48 Watchers</p>
-        <p>$ {{price}}</p>
+        <p>$ {{productData.price}}</p>
         </div>
         <div class="subtitle-container">
         <button @click="$router.push(`/product/${productData._id}`)" id="profile-view-button" class="blue-button"
@@ -23,13 +22,14 @@
 
     </template>
 
-    <script>
-    export default {
+
+<script>
+export default {
     props: {
-        productData: Object,
+    productData: Object,
     },
     data() {
-        return {
+    return {
         name: this.productData.name,
         price: this.productData.price,
         location: this.productData.location,
@@ -37,10 +37,10 @@
         description: this.productData.description
         }
     }
-    }
-    </script>
+}
+</script>
 
-    <style scoped>
+<style scoped>
     .item-box {
     min-width: 220px;
     max-width: 260px;
@@ -112,4 +112,4 @@
     .font-blue {
     color: blue;
     }
-    </style>
+</style>

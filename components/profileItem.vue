@@ -16,7 +16,7 @@
       <p>$ {{price}}</p>
     </div>
     <div class="subtitle-container">
-      <button @click="$router.push('/product/:id');" id="profile-view-button" class="blue-button"
+      <button @click="$router.push(`/product/${productData._id}`)" id="profile-view-button" class="blue-button"
         type="button">View</button>
       <button @click="$emit('deleteItem', id)" id="profile-delete-button" class="white-button"
         type="button">Delete</button>

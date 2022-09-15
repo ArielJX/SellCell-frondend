@@ -11,50 +11,8 @@
                         @click="$router.push('listProduct')">List new item</button>
                 </div>
                 <div class="listing-box column-3">
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button"
-                                @click="$router.push('product')">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button"
-                                @click="$router.push('product')">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button"
-                                @click="removeElement(key)">Delete</button>
-                        </div>
-                    </div>
-                    <ProfileItem v-for="product of productArray" :product-data="product" :key="product.id" />
+                    <ProfileItem @delete-item="deleteItem" v-for="product of productArray" :product-data="product"
+                        :key="product.id" />
 
                 </div>
             </div>
@@ -107,14 +65,14 @@ export default {
             const data = await response.json();
             this.productArray = data;
         },
-        // async deleteProduct(id) {
-        //     const response = await fetch(`http://localhost:3000/products/${id}`, {
-        //         method: "DELETE"
-        //     });
-        //     const data = await response.text();
+        async deleteItem(id) {
+            const response = await fetch(`http://localhost:3000/products/${id}`, {
+                method: "DELETE"
+            });
+            const data = await response.json();
 
-        //     this.getProduct();
-        // },
+            this.getItem();
+        },
         // removeElement: function (index) {
         //     this.$delete(this.items, index);
         // }
@@ -293,6 +251,10 @@ span {
 button {
     height: 24px;
     margin: auto 6px;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 .blue-button {

@@ -5,20 +5,20 @@
       <img src="../src/image/iphone13.png" alt="">
     </div>
     <div class="subtitle-container">
-      <span>{{productData.location}}</span>
+      <span>{{location}}</span>
       <span>Listed: Thur, 1 Sep</span>
     </div>
     <div class="subtitle-container mb-2">
-      <h4>{{productData.name}}</h4>
-      <!-- <h4>{{id}}</h4> -->
+      <h4>{{name}}</h4>
     </div>
     <div class="subtitle-container">
       <p class="font-blue">48 Watchers</p>
-      <p>{{productData.price}}</p>
+      <p>$ {{price}}</p>
     </div>
     <div class="subtitle-container">
-      <button id="profile-view-button" class="blue-button" type="button">View</button>
-      <button @click="$emit('deleteItem', productData.id)" id="profile-delete-button" class="white-button"
+      <button @click="$router.push('/product/:id');" id="profile-view-button" class="blue-button"
+        type="button">View</button>
+      <button @click="$emit('deleteItem', id)" id="profile-delete-button" class="white-button"
         type="button">Delete</button>
     </div>
   </div>
@@ -71,6 +71,10 @@ img {
 button {
   height: 24px;
   margin: auto 6px;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 .blue-button {

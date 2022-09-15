@@ -7,69 +7,13 @@
             <div class="border-container">
                 <div class="title-container">
                     <h3>Sell items Listings</h3>
-                    <button id="profile-list-button" class="white-button" type="button" @click="$router.push('listProduct')">List new item</button>
+                    <button id="profile-list-button" class="white-button" type="button"
+                        @click="$router.push('listProduct')">List new item</button>
                 </div>
                 <div class="listing-box column-3">
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button" @click="$router.push('product')">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
+                    <ProfileItem @delete-item="deleteItem" v-for="product of productArray" :product-data="product"
+                        :key="product.id" />
+
                 </div>
             </div>
         </div>
@@ -102,8 +46,40 @@
 </template>
 
 <script>
+import ProfileItem from "../../components/profileItem.vue";
 export default {
+    components: {
+        ProfileItem,
+    },
+    data() {
+        return {
+            name: null,
+            price: null,
+            location: null,
+            productArray: []
+        };
+    },
+    methods: {
+        async getItem() {
+            const response = await fetch(`http://localhost:3000/products`);
+            const data = await response.json();
+            this.productArray = data;
+        },
+        async deleteItem(id) {
+            const response = await fetch(`http://localhost:3000/products/${id}`, {
+                method: "DELETE"
+            });
+            const data = await response.json();
 
+            this.getItem();
+        },
+        // removeElement: function (index) {
+        //     this.$delete(this.items, index);
+        // }
+    },
+    mounted() {
+        this.getItem();
+    }
 }
 </script>
 
@@ -152,14 +128,32 @@ export default {
     gap: 2rem;
 }
 
-.column-3 {
+/* .column-3 {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
-    grid-gap: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .item-box {
+    min-width: 220px;
+    max-width: 260px;
+    flex: 1 1 30%;
+    border: 1px solid gainsboro;
+    border-radius: 6px;
+    padding-bottom: 1em;
+} */
+
+.column-3 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.item-box {
+    max-width: 240px;
+    flex: 1 1 30%;
     border: 1px solid gainsboro;
     border-radius: 6px;
     padding-bottom: 1em;
@@ -257,6 +251,10 @@ span {
 button {
     height: 24px;
     margin: auto 6px;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 .blue-button {

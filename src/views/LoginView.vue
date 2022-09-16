@@ -18,7 +18,7 @@
                 </a>
             </div>
         </div>
-        <button class="mt-1 center" type="button">Create</button>
+        <button class="mt-1 center" type="button">Login</button>
     </div>
 </template>
 
@@ -49,7 +49,7 @@ export default {
 
 
 label {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 input {
@@ -75,22 +75,23 @@ input {
     gap: 1em;
 }
 
-span, a {
+span,
+a {
     margin: 8px 2px;
     font-size: 18px;
 }
 
 a:hover {
- color: red;
+    color: red;
 }
 
 button {
-  color: white;
-  background-color: #1950DA;
-  border: none;
-  border-radius: 2px;
-  padding: 1em 2em;
-  margin-bottom: 4em;
-  font-size: 16px;
+    color: white;
+    background-color: #1950DA;
+    border: none;
+    border-radius: 2px;
+    padding: 1em 2em;
+    margin-bottom: 4em;
+    font-size: 16px;
 }
 </style>

@@ -9,14 +9,14 @@
           price: null,
           description: null,
           location: null,
-          productObject: {},
+          productDataArray: [],
         }
       },
       methods: {
       async getPost() {
-      const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`);
+      const response = await fetch(`http://localhost:3000/products`);
       const data = await response.json();
-      this.productObject = data;
+      this.productDataArray = data;
         },
       },
       mounted() {
@@ -82,7 +82,7 @@
       <div class="list-product-page">
         <div class="listing-box column-3">
           <div class="item-box">
-              <listItemHome v-for="product of productArray" :key="product.id" :productData="product"/>
+              <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product"/>
                   <button id="profile-view-button" class="blue-button" type="button" @click="$router.push('product')">View</button>
               </div>
           </div>

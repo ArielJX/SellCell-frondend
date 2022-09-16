@@ -1,25 +1,23 @@
     <template>
-
-    <div class="item-box">
-        <div>
-            <img src="../src/image/iphone13.png" alt="">
+        <div class="item-box">
+            <div>
+                <img src="../src/image/iphone13.png" alt="">
+            </div>
+            <div class="subtitle-container">
+                <span>{{productData.location}}</span>
+                <span>Listed: Thur, 1 Sep</span>
+            </div>
+            <div class="subtitle-container mb-2">
+            <h4>{{productData.name}}</h4>
+            </div>
+            <div class="subtitle-container">
+            <h5>$ {{productData.price}}</h5>
+            </div>
+            <div class="subtitle-container">
+            <button @click="$router.push(`/product/${productData._id}`)" id="profile-view-button" class="blue-button"
+                type="button">View</button>
+            </div>
         </div>
-        <div class="subtitle-container">
-            <span>{{productData.location}}</span>
-            <span>Listed: Thur, 1 Sep</span>
-        </div>
-        <div class="subtitle-container mb-2">
-        <h4>{{productData.name}}</h4>
-        </div>
-        <div class="subtitle-container">
-        <p>$ {{productData.price}}</p>
-        </div>
-        <div class="subtitle-container">
-        <button @click="$router.push(`/product/${productData._id}`)" id="profile-view-button" class="blue-button"
-            type="button">View</button>
-        </div>
-    </div>
-
     </template>
 
 
@@ -42,9 +40,9 @@ export default {
 
 <style scoped>
     .item-box {
-    min-width: 220px;
-    max-width: 260px;
-    flex: 1 1 30%;
+    min-width: 190px;
+    max-width: 220px;
+    display: block;
     border: 1px solid gainsboro;
     border-radius: 6px;
     padding-bottom: 1em;
@@ -52,7 +50,7 @@ export default {
 
     img {
     width: 100%;
-    border-radius: 6px;
+    border-radius: 3px;
     }
 
     .subtitle-container {
@@ -61,7 +59,6 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     }
-
     .mb-2 {
     margin-bottom: 1.5em;
     }

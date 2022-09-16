@@ -80,14 +80,8 @@
       <h2>Mobile Listings</h2>
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
       <div class="list-product-page">
-        <div class="listing-box column-3">
-          <div class="item-box">
               <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product"/>
-                  <button id="profile-view-button" class="blue-button" type="button" @click="$router.push('product')">View</button>
-              </div>
           </div>
-        </div>  
-        <button class="btn__view-listing">Browse More Phones</button>
     </section>
 
     <div class="strip-banner__marketplace">
@@ -258,13 +252,11 @@ $white: white;
     padding-bottom: 15px;
   }
   .list-product-page {
-    box-sizing: border-box;
     width: 100%;
-    border: solid #5B6DCD 5px;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    grid-gap: 20px;
+    padding: 50px
   }
   .btn__view-listing {
     @include btn-theme;

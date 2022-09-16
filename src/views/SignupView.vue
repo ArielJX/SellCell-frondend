@@ -57,8 +57,10 @@ methods: {
                     })
                 });
             const data = await response.text();
-                // window.location = "http://127.0.0.1:5173/login";
+            console.log("registration successfull")
+                window.location = "http://127.0.0.1:5173/login";
             },
+
             async getProfileLists() {
             const response = await fetch("http://localhost:3000/register");
             const data = await response.json();

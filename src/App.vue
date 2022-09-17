@@ -8,7 +8,7 @@
       <div class="content-wrap">
     <header>
       <nav>
-        <img src="../src/image/logo.png" alt="logo">
+        <a href="/"><img src="../src/image/logo.png" alt="logo"></a>
         <div class="nav-link">
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/login">Login</RouterLink>

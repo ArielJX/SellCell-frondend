@@ -111,9 +111,10 @@ export default {
 
 .white-h2 {
     color: white;
-    font-size: 2em;
+    font-size: 38px;
     margin: 4px auto;
     align-self: center;
+    text-shadow: 4px 4px 6px black;;
 }
 
 .border-container {
@@ -147,7 +148,7 @@ export default {
 
 img {
     width: 100%;
-    border-radius: 6px;
+    border-radius: 6px 6px;
 }
 
 .subtitle-container {

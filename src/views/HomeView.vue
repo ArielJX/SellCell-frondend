@@ -166,9 +166,6 @@ export default {
     },
 
   },
-  mounted() {
-      this.productLists();
-    }
 }
 </script>
 

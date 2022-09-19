@@ -5,7 +5,7 @@
       <div class="header-container__left">
         <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
           SellCell.</h1> <br>
-        <p>Where you can safely buy and sell your mobile devices.</p> <br><br> <button class="btn__sign-up">Sign Up
+        <p>Where you can safely buy and sell your mobile devices.</p> <br><br> <button @click="$router.push('signup')" class="btn__sign-up" type="button">Sign Up
           Now</button>
       </div>
       <div class="header-container__right">

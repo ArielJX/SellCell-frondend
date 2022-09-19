@@ -73,9 +73,7 @@ export default {
 
             this.getItem();
         },
-        // removeElement: function (index) {
-        //     this.$delete(this.items, index);
-        // }
+       
     },
     mounted() {
         this.getItem();

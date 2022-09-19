@@ -6,11 +6,11 @@
             </div>
             <div class="border-container">
                 <div class="title-container">
-                    <h3>Sell items Listings</h3>
-                    <button id="profile-list-button" class="white-button" type="button"
+                    <h3 class="center">Sell items Listings</h3>
+                    <button id="profile-list-button" class="white-button center" type="button"
                         @click="$router.push('listProduct')">List new item</button>
                 </div>
-                <div class="listing-box column-3">
+                <div class="column-3 center">
                     <ProfileItem @delete-item="deleteItem" v-for="product of productArray" :product-data="product"
                         :key="product.id" />
 
@@ -83,6 +83,7 @@ export default {
 
 <style scoped>
 .profile {
+    min-width: 400px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -102,15 +103,16 @@ export default {
     background-repeat: none;
     background-size: cover;
     border-radius: 10px;
-    position: relative;
+    display: flex;
+
 }
 
 .white-h2 {
     color: white;
-    font-size: 2em;
-    position: absolute;
-    top: 25%;
-    left: 10%;
+    font-size: 38px;
+    margin: 4px auto;
+    align-self: center;
+    text-shadow: 4px 4px 6px black;;
 }
 
 .border-container {
@@ -126,27 +128,12 @@ export default {
     gap: 2rem;
 }
 
-/* .column-3 {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.item-box {
-    min-width: 220px;
-    max-width: 260px;
-    flex: 1 1 30%;
-    border: 1px solid gainsboro;
-    border-radius: 6px;
-    padding-bottom: 1em;
-} */
-
 .column-3 {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
+
 }
 
 .item-box {
@@ -159,7 +146,7 @@ export default {
 
 img {
     width: 100%;
-    border-radius: 6px;
+    border-radius: 6px 6px;
 }
 
 .subtitle-container {
@@ -183,9 +170,10 @@ img {
     margin-bottom: 2rem;
 }
 
-.center {
+/* .center {
+    margin: 4px auto;
     align-self: center;
-}
+} */
 
 .img-wrapper {
     width: 160px;
@@ -225,7 +213,7 @@ img {
 }
 
 h3 {
-    font-size: 28px;
+    font-size: 26px;
 }
 
 h4 {
@@ -269,5 +257,31 @@ button:hover {
     border: #1950DA 1px solid;
     border-radius: 4px;
     padding: 4px 1em;
+    width: 120px;
+}
+
+@media screen and (max-width: 680px) {
+    .profile-right {
+        display: none;
+    }
+
+    .profile-left {
+        width: 100%;
+    }
+
+    .title-container {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 2rem;
+    }
+
+    .center {
+        margin: 4px auto;
+        align-self: center;
+    }
+
+    .border-container {
+        padding: 1rem 0px;
+    }
 }
 </style>

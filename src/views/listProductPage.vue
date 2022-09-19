@@ -9,11 +9,11 @@
             <div class="product-list__brand">
                 <label for="brand">Product Brand</label>
                 <select name="brand" id="brand" v-model="brand">
-                    <option value="apple">Apple</option>
-                    <option value="samsung">Samsung</option>
-                    <option value="huawei">Huawei</option>
-                    <option value="oppo">Oppo</option>
-                    <option value="nokia">Nokia</option>
+                    <option value="Apple">Apple</option>
+                    <option value="Samsung">Samsung</option>
+                    <option value="Huawei">Huawei</option>
+                    <option value="Oppo">Oppo</option>
+                    <option value="Nokia">Nokia</option>
                 </select>
             </div>
             <div class="product-list__price">
@@ -32,9 +32,9 @@
             <div class="product-list__location">
                 <label for="location">Product Location</label>
                 <select name="location" id="location" v-model="location">
-                    <option value="auckland">Auckland</option>
-                    <option value="hamilton">Hamilton</option>
-                    <option value="wellington">Wellington</option>
+                    <option value="Auckland">Auckland</option>
+                    <option value="Hamilton">Hamilton</option>
+                    <option value="Wellington">Wellington</option>
                     <option value="Christchurch">Christchurch</option>
                 </select>
             </div>
@@ -84,6 +84,7 @@ export default {
     },
 
 };
+
 </script>
 
 <style lang="scss" scoped>

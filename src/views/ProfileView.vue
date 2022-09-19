@@ -85,6 +85,7 @@ export default {
 
 <style scoped>
 .profile {
+    min-width: 400px;
     width: 100%;
     margin: 0 auto;
     display: flex;

@@ -1,5 +1,28 @@
-<script setup>
-
+<script>
+  import ListItemHome from '../../components/listItemHome.vue';
+    export default{
+      components: {ListItemHome},
+      data(){
+        return {
+          name: null,
+          brand: null,
+          price: null,
+          description: null,
+          location: null,
+          productDataArray: [],
+        }
+      },
+      methods: {
+      async getPost() {
+      const response = await fetch(`http://localhost:3000/products`);
+      const data = await response.json();
+      this.productDataArray = data;
+        },
+      },
+      mounted() {
+        this.getPost();
+      }
+    }
 </script>
 
   
@@ -57,8 +80,8 @@
       <h2>Mobile Listings</h2>
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
       <div class="list-product-page">
-        <button class="btn__view-listing">Browse More Phones</button>
-      </div>
+              <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product"/>
+          </div>
     </section>
 
     <div class="strip-banner__marketplace">
@@ -125,7 +148,6 @@ $dark-blue: #003489;
 $background-blue: #E1EDFF;
 $black: black;
 $white: white;
-
 @mixin btn-theme {
   display: inline-block;
   justify-content: center;
@@ -138,12 +160,10 @@ $white: white;
   border-radius: .3rem;
   font-weight: 500;
   text-align: center;
-
   &:hover {
     background: $main-blue;
   }
 }
-
 @mixin strip-banner-theme {
   background-color: $background-blue;
   display: flex;
@@ -151,33 +171,25 @@ $white: white;
   padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
-
   .container__marketplace {
     padding-right: 15px;
   }
-
   img {
     height: 300px;
   }
-
   h1 {
     margin: 0;
   }
-
   p {
     margin-right: 15px;
   }
-
   .btn__marketplace {
     @include btn-theme;
   }
 }
-
 .text-main-blue {
   color: $main-blue;
 }
-
-
 .header-container {
   display: flex;
   align-items: center;
@@ -198,8 +210,6 @@ $white: white;
     @include btn-theme
   }
 }
-
-
 .search-bar {
   padding: 20px;
   width: 100%;
@@ -209,26 +219,21 @@ $white: white;
   display: flex;
   align-items: center;
   justify-content: center;
-
   .btn__search {
     @include btn-theme
   }
-
   .search-bar__keywords {
     width: 100%;
-
     input {
       width: 90%;
       display: inline-block;
       padding: 10px;
     }
   }
-
   .search-bar__brand,
   .search-bar__price,
   .search-bar__location {
     padding: 20px;
-
     select {
       text-decoration: none;
       display: inline-block;
@@ -236,35 +241,27 @@ $white: white;
     }
   }
 }
-
 .mobile-listings {
   padding-top: 30px;
   padding-bottom: 30px;
-
   h2,
   p {
     padding-left: 100px;
   }
-
   p {
     padding-bottom: 15px;
   }
-
   .list-product-page {
-    box-sizing: border-box;
     width: 100%;
-    border: solid #5B6DCD 5px;
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    grid-gap: 20px;
+    padding: 50px
   }
-
   .btn__view-listing {
     @include btn-theme;
   }
 }
-
 .strip-banner__marketplace {
   background-color: $background-blue;
   display: flex;
@@ -272,41 +269,33 @@ $white: white;
   padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
-
   .container__marketplace {
     padding-right: 15px;
   }
-
   img {
     height: 300px;
   }
-
   h1 {
     margin: 0;
   }
-
   p {
     margin-right: 15px;
   }
-
   .btn__marketplace {
     @include btn-theme;
   }
 }
-
 .strip-banner__mobile-brands {
   background-color: white;
   padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
-
   h2,
   p {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
   .container__mobile-brands-flexbox {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -315,19 +304,16 @@ $white: white;
     flex: 1 0 0;
     justify-content: center;
     align-items: center;
-
     .mobile-brands-detail {
       display: block;
       border-radius: .5rem;
       padding: 3rem;
       gap: 1.5rem;
-
       .mobile-brands-image {
         display: block;
         width: 100%;
         height: 150px;
         padding: 1rem;
-
         img {
           object-fit: contain;
           width: 100%;
@@ -337,7 +323,6 @@ $white: white;
     }
   }
 }
-
 .strip-banner__mobile-experts {
   background-color: $background-blue;
   display: flex;
@@ -345,27 +330,20 @@ $white: white;
   padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
-
   .container__mobile-experts {
     padding-right: 15px;
   }
-
   img {
     height: 300px;
   }
-
   h1 {
     margin: 0;
   }
-
   p {
     margin-right: 15px;
   }
-
   .btn__mobile-experts {
     @include btn-theme;
   }
 }
-
-
 </style>

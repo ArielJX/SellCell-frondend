@@ -20,7 +20,7 @@
         </div>
 
         <div class="product-detail">
-            <h1>Iphone X</h1>
+            <h1>{{productObject.name}}</h1>
             <h3>Details</h3>
             <div class="product-details">
                 <div v-if="!editing" class="detail-box">

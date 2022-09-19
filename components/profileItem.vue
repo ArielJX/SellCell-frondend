@@ -2,7 +2,7 @@
 
   <div class="item-box">
     <div>
-      <img src="../src/image/iphone13.png" alt="">
+      <img :src="`data:image/png;base64, ${image}`" alt="">
     </div>
     <div class="subtitle-container">
       <span>{{location}}</span>
@@ -36,7 +36,8 @@ export default {
       price: this.productData.price,
       location: this.productData.location,
       id: this.productData._id,
-      description: this.productData.description
+      description: this.productData.description,
+      image: this.productData.image.data
     }
   }
 }

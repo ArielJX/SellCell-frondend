@@ -6,70 +6,14 @@
             </div>
             <div class="border-container">
                 <div class="title-container">
-                    <h3>Sell items Listings</h3>
-                    <button id="profile-list-button" class="white-button" type="button" @click="$router.push('listProduct')">List new item</button>
+                    <h3 class="center">Sell items Listings</h3>
+                    <button id="profile-list-button" class="white-button center" type="button"
+                        @click="$router.push('listProduct')">List new item</button>
                 </div>
-                <div class="listing-box column-3">
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button" @click="$router.push('product')">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
-                    <div class="item-box">
-                        <div>
-                            <img src="../image/iphone13.png" alt="">
-                        </div>
-                        <div class="subtitle-container">
-                            <span>Auckland</span>
-                            <span>Listed: Thur, 1 Sep</span>
-                        </div>
-                        <div class="subtitle-container mb-2">
-                            <h4>Iphone 13 pro, 99% new</h4>
-                        </div>
-                        <div class="subtitle-container underline">
-                            <p class="font-blue">48 Watchers</p>
-                            <p>Price by negotiation</p>
-                        </div>
-                        <div class="subtitle-container">
-                            <button id="profile-view-button" class="blue-button" type="button">View</button>
-                            <button id="profile-delete-button" class="white-button" type="button">Delete</button>
-                        </div>
-                    </div>
+                <div class="column-3 center">
+                    <ProfileItem @delete-item="deleteItem" v-for="product of productArray" :product-data="product"
+                        :key="product.id" />
+
                 </div>
             </div>
         </div>
@@ -110,6 +54,7 @@ export default {
 
 <style scoped>
 .profile {
+    min-width: 400px;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -129,15 +74,16 @@ export default {
     background-repeat: none;
     background-size: cover;
     border-radius: 10px;
-    position: relative;
+    display: flex;
+
 }
 
 .white-h2 {
     color: white;
-    font-size: 2em;
-    position: absolute;
-    top: 25%;
-    left: 10%;
+    font-size: 38px;
+    margin: 4px auto;
+    align-self: center;
+    text-shadow: 4px 4px 6px black;;
 }
 
 .border-container {
@@ -155,9 +101,10 @@ export default {
 
 .column-3 {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(100px, 1fr));
-    grid-gap: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+
 }
 
 .item-box {
@@ -168,7 +115,7 @@ export default {
 
 img {
     width: 100%;
-    border-radius: 6px;
+    border-radius: 6px 6px;
 }
 
 .subtitle-container {
@@ -192,9 +139,10 @@ img {
     margin-bottom: 2rem;
 }
 
-.center {
+/* .center {
+    margin: 4px auto;
     align-self: center;
-}
+} */
 
 .img-wrapper {
     width: 160px;
@@ -234,7 +182,7 @@ img {
 }
 
 h3 {
-    font-size: 28px;
+    font-size: 26px;
 }
 
 h4 {
@@ -274,5 +222,31 @@ button {
     border: #1950DA 1px solid;
     border-radius: 4px;
     padding: 4px 1em;
+    width: 120px;
+}
+
+@media screen and (max-width: 680px) {
+    .profile-right {
+        display: none;
+    }
+
+    .profile-left {
+        width: 100%;
+    }
+
+    .title-container {
+        flex-direction: column;
+        gap: 0;
+        margin-bottom: 2rem;
+    }
+
+    .center {
+        margin: 4px auto;
+        align-self: center;
+    }
+
+    .border-container {
+        padding: 1rem 0px;
+    }
 }
 </style>

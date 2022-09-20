@@ -1,33 +1,6 @@
-<script>
-  import ListItemHome from '../../components/listItemHome.vue';
-    export default{
-      components: {ListItemHome},
-      data(){
-        return {
-          name: null,
-          brand: null,
-          price: null,
-          description: null,
-          location: null,
-          productDataArray: [],
-        }
-      },
-      methods: {
-      async getPost() {
-      const response = await fetch(`http://localhost:3000/products`);
-      const data = await response.json();
-      this.productDataArray = data;
-        },
-      },
-      mounted() {
-        this.getPost();
-      }
-    }
-</script>
-
-  
 <template>
   <main>
+    <!-- Heading  -->
     <div class="header-container">
       <div class="header-container__left">
         <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
@@ -39,51 +12,65 @@
         <img class="header-banner-image" src="src/img/header-guy.jpeg">
       </div>
     </div>
+
+
+
+    <!-- Search bar -->
     <section class="search-bar">
       <div class="search-bar__container">
-        <div class="search-bar__keywords">
-          <input type="text" placeholder="Search Keyword">
-        </div>
+        <!-- <div class="search-bar__keywords">
+          <input type="text" placeholder="Search Keyword" v-model="name">
+        </div> -->
       </div>
+      
       <div class="search-bar__brand">
-        <select>
-          <option value="" disabled selected>Brand</option>
-          <option value="1">Iphone</option>
-          <option value="2">Samsung</option>
-          <option value="3">Huawei</option>
-          <option value="4">Other</option>
+        <label>Brand</label>
+        <select v-model="brand">
+          <option disabled selected>Brand</option>
+          <option>Apple</option>
+          <option>Oppo</option>
+          <option>Samsung</option>
+          <option>Huawei</option>
+          <option>Other</option>
         </select>
       </div>
       <div class="search-bar__price">
-        <select>
-          <option value="" disabled selected>Price</option>
-          <option value="1">$400 - $699</option>
-          <option value="2">$700 - $999</option>
-          <option value="3">$1000 - $1299</option>
-          <option value="4">$1300 +</option>
-        </select>
+        <label>Price</label>
+        <input type="number" v-model="price">
       </div>
       <div class="search-bar__location">
-        <select>
-          <option value="" disabled selected>Location</option>
-          <option value="1">Auckland</option>
-          <option value="2">Wellington</option>
-          <option value="3">Hamilton</option>
-          <option value="4">Christchurch</option>
-          <option value="5">Other</option>
+        <label>Location</label>
+        <select v-model="location">
+          <option disabled selected>Location</option>
+          <option>Auckland</option>
+          <option>Wellington</option>
+          <option>Hamilton</option>
+          <option>Christchurch</option>
+          <option>Other</option>
         </select>
       </div>
-      <button class="btn__search">Search My Phone</button>
+      <button @click="findproductLists" class="btn__search">Search My Phone</button>
     </section>
 
+
+    <!-- All Mobile listings -->
+
+
+
+
+    <!--Searched Mobile listings -->
     <section class="mobile-listings">
-      <h2>Mobile Listings</h2>
+      <h2>Mobile Listings found</h2>
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
+
       <div class="list-product-page">
-              <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product"/>
-          </div>
+      <searchedProduct v-for="findproduct of findproductArray" :key="findproduct.id" :findproduct-data="findproduct" />
+      </div>
+
     </section>
 
+
+    <!-- Marketplace banner -->
     <div class="strip-banner__marketplace">
       <div class="container__marketplace">
         <h2>New Zealand's Most Trusted, <span class="text-main-blue">Marketplace</span> for selling and buying mobile
@@ -129,6 +116,8 @@
       </div>
     </div>
 
+
+    <!-- Mobile expert banner -->
     <div class="strip-banner__mobile-experts">
       <div class="container__mobile-experts">
         <h2>Get your phones checked by our <span class="text-main-blue">Mobile Experts</span></h2>
@@ -142,6 +131,46 @@
   </main>
 </template>
 
+
+
+<script>
+import searchedProduct from '../../components/searchedProduct.vue';
+
+export default {
+  components: { searchedProduct},
+    data() {
+        return {
+            brand: null,
+            price: null,
+            location: null,
+            productArray: [],
+            findproductArray: []
+        };
+    },
+
+    methods: {
+        async findproductLists() {
+            console.log("filtered products");
+            const response = await fetch("http://localhost:3000/findproducts", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({
+                        brand: this.brand,
+                        price: this.price,
+                        location: this.location
+                    })
+                })
+                const data = await response.json();
+                this.findproductArray = data;
+                this.$router.push({name: 'home'});
+    },
+
+  },
+}
+</script>
+
+
+
 <style lang="scss">
 $main-blue: #184DD1;
 $dark-blue: #003489;
@@ -152,14 +181,16 @@ $white: white;
   display: inline-block;
   justify-content: center;
   margin-top: 1rem;
-  padding: .8rem 3rem;
+  padding: 15px 1em;
   background: $dark-blue;
   color: $white;
   cursor: pointer;
-  font-size: 1.7rem;
   border-radius: .3rem;
-  font-weight: 500;
   text-align: center;
+  font-size: 16px;
+  border: none;
+  border: 1px solid white;
+
   &:hover {
     background: $main-blue;
   }
@@ -190,6 +221,15 @@ $white: white;
 .text-main-blue {
   color: $main-blue;
 }
+
+li {
+  list-style-type: none;
+  margin-right: 2em;
+}
+
+
+
+
 .header-container {
   display: flex;
   align-items: center;
@@ -220,6 +260,7 @@ $white: white;
   align-items: center;
   justify-content: center;
   .btn__search {
+    margin-left: 2em;
     @include btn-theme
   }
   .search-bar__keywords {
@@ -230,14 +271,29 @@ $white: white;
       padding: 10px;
     }
   }
-  .search-bar__brand,
+
+  .search-bar__brand, 
   .search-bar__price,
   .search-bar__location {
     padding: 20px;
+    display:block;
+    color: white;
+
+    label {
+      margin-right: 1em;
+    }
+
     select {
       text-decoration: none;
       display: inline-block;
       padding: 10px;
+      width: 150px;
+    }
+
+    input {
+      display: inline-block;
+      padding: 10px;
+      width: 120px;
     }
   }
 }
@@ -246,17 +302,16 @@ $white: white;
   padding-bottom: 30px;
   h2,
   p {
-    padding-left: 100px;
-  }
-  p {
     padding-bottom: 15px;
   }
   .list-product-page {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(100px, 1fr));
-    grid-gap: 20px;
-    padding: 50px
+    border: solid #5B6DCD 5px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    padding: 2em 4em;
   }
   .btn__view-listing {
     @include btn-theme;

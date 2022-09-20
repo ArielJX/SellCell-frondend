@@ -1,28 +1,28 @@
 <script>
-  import ListItemHome from '../../components/listItemHome.vue';
-    export default{
-      components: {ListItemHome},
-      data(){
-        return {
-          name: null,
-          brand: null,
-          price: null,
-          description: null,
-          location: null,
-          productDataArray: [],
-        }
-      },
-      methods: {
-      async getPost() {
+import ListItemHome from '../../components/listItemHome.vue';
+export default {
+  components: { ListItemHome },
+  data() {
+    return {
+      name: null,
+      brand: null,
+      price: null,
+      description: null,
+      location: null,
+      productDataArray: [],
+    }
+  },
+  methods: {
+    async getPost() {
       const response = await fetch(`http://localhost:3000/products`);
       const data = await response.json();
       this.productDataArray = data;
-        },
-      },
-      mounted() {
-        this.getPost();
-      }
-    }
+    },
+  },
+  mounted() {
+    this.getPost();
+  }
+}
 </script>
 
   
@@ -36,7 +36,7 @@
           Now</button>
       </div>
       <div class="header-container__right">
-        <img class="header-banner-image" src="src/img/header-guy.jpeg">
+        <!-- <img class="header-banner-image" src="src/img/header-guy.jpeg"> -->
       </div>
     </div>
     <section class="search-bar">
@@ -79,9 +79,9 @@
     <section class="mobile-listings">
       <h2>Mobile Listings</h2>
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
-      <div class="list-product-page">
-              <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product"/>
-          </div>
+      <div class="list-product-page column-3">
+        <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product" />
+      </div>
     </section>
 
     <div class="strip-banner__marketplace">
@@ -148,92 +148,119 @@ $dark-blue: #003489;
 $background-blue: #E1EDFF;
 $black: black;
 $white: white;
+
 @mixin btn-theme {
   display: inline-block;
   justify-content: center;
-  margin-top: 1rem;
+  // margin-top: 1rem;
   padding: .8rem 3rem;
   background: $dark-blue;
   color: $white;
   cursor: pointer;
-  font-size: 1.7rem;
+  font-size: 1.2rem;
   border-radius: .3rem;
   font-weight: 500;
   text-align: center;
+
   &:hover {
     background: $main-blue;
   }
 }
+
 @mixin strip-banner-theme {
   background-color: $background-blue;
   display: flex;
   justify-content: space-between;
-  padding: 100px;
+  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
+
   .container__marketplace {
     padding-right: 15px;
   }
+
   img {
     height: 300px;
   }
+
   h1 {
     margin: 0;
   }
+
   p {
     margin-right: 15px;
   }
+
   .btn__marketplace {
     @include btn-theme;
   }
 }
+
+
 .text-main-blue {
   color: $main-blue;
 }
+
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+
   &__left {
-    width: 600px;
-    padding-left: 6em;
+    width: 100%;
+    padding-left: 4em;
   }
+
   &__right {
-    width: 600px;
+    width: 100%;
     height: 400px;
-    img {
-      width: 600px;
-      height: 400px;
-    }
+    background-image: url(../img/header-guy.jpeg);
+    background-repeat: none;
+    background-size: cover;
+    background-position: center;
+
+    // img {
+    //   width: 100%;
+    //   height: auto;
+    // }
   }
+
   .btn__sign-up {
     @include btn-theme
   }
 }
+
 .search-bar {
-  padding: 20px;
+  // padding: 20px;
   width: 100%;
-  height: 10rem;
+  height: 6rem;
   background-color: $main-blue;
-  position: relative;
+  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+
   .btn__search {
     @include btn-theme
   }
+
   .search-bar__keywords {
-    width: 100%;
+    // width: 100%;
+    padding: 1rem;
+
     input {
       width: 90%;
       display: inline-block;
       padding: 10px;
     }
   }
+
   .search-bar__brand,
   .search-bar__price,
   .search-bar__location {
-    padding: 20px;
+    padding: 1rem;
+
     select {
       text-decoration: none;
       display: inline-block;
@@ -241,61 +268,83 @@ $white: white;
     }
   }
 }
+
 .mobile-listings {
   padding-top: 30px;
   padding-bottom: 30px;
+
   h2,
   p {
     padding-left: 100px;
   }
+
   p {
     padding-bottom: 15px;
   }
+
   .list-product-page {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(100px, 1fr));
-    grid-gap: 20px;
-    padding: 50px
+    // display: grid;
+    // grid-template-columns: repeat(4, minmax(100px, 1fr));
+    // grid-gap: 20px;
+    // padding: 50px
   }
+
+  .column-3 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    // padding: 0px 100px;
+  }
+
   .btn__view-listing {
     @include btn-theme;
   }
 }
+
 .strip-banner__marketplace {
   background-color: $background-blue;
   display: flex;
   justify-content: space-between;
-  padding: 100px;
+  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
+
   .container__marketplace {
     padding-right: 15px;
   }
+
   img {
     height: 300px;
   }
+
   h1 {
     margin: 0;
   }
+
   p {
     margin-right: 15px;
   }
+
   .btn__marketplace {
     @include btn-theme;
   }
 }
+
 .strip-banner__mobile-brands {
   background-color: white;
-  padding: 100px;
+  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
+
   h2,
   p {
     display: flex;
     justify-content: center;
     align-items: center;
   }
+
   .container__mobile-brands-flexbox {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -304,16 +353,19 @@ $white: white;
     flex: 1 0 0;
     justify-content: center;
     align-items: center;
+
     .mobile-brands-detail {
       display: block;
       border-radius: .5rem;
       padding: 3rem;
       gap: 1.5rem;
+
       .mobile-brands-image {
         display: block;
         width: 100%;
         height: 150px;
         padding: 1rem;
+
         img {
           object-fit: contain;
           width: 100%;
@@ -323,25 +375,31 @@ $white: white;
     }
   }
 }
+
 .strip-banner__mobile-experts {
   background-color: $background-blue;
   display: flex;
   justify-content: space-between;
-  padding: 100px;
+  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
+
   .container__mobile-experts {
     padding-right: 15px;
   }
+
   img {
     height: 300px;
   }
+
   h1 {
     margin: 0;
   }
+
   p {
     margin-right: 15px;
   }
+
   .btn__mobile-experts {
     @include btn-theme;
   }

@@ -1,8 +1,8 @@
 <template>
 
-  <div class="item-box">
+  <div class="item-box center">
     <div>
-      <img src="../src/image/iphone13.png" alt="">
+      <img :src="`data:image/png;base64, ${image}`" alt="">
     </div>
     <div class="subtitle-container">
       <span>{{location}}</span>
@@ -36,7 +36,8 @@ export default {
       price: this.productData.price,
       location: this.productData.location,
       id: this.productData._id,
-      description: this.productData.description
+      description: this.productData.description,
+      image: this.productData.image.data
     }
   }
 }
@@ -45,7 +46,7 @@ export default {
 <style scoped>
 .item-box {
   min-width: 220px;
-  max-width: 260px;
+  max-width: 240px;
   flex: 1 1 30%;
   border: 1px solid gainsboro;
   border-radius: 6px;
@@ -113,5 +114,12 @@ span {
 
 .font-blue {
   color: blue;
+}
+
+@media screen and (max-width: 680px) {
+  .center {
+    margin: 0 auto;
+    align-self: center;
+  }
 }
 </style>

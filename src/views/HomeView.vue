@@ -53,7 +53,7 @@
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
 
       <div class="list-product-page">
-      <listProduct v-if="!showing" v-for="product of productArray" :product-data="product" />
+      <listItemHome v-if="!showing" v-for="product of productArray" :product-data="product" />
       <searchedProduct v-else v-for="findproduct of findproductArray" :findproduct-data="findproduct" />
       </div>
 
@@ -124,11 +124,11 @@
 
 
 <script>
-import listProduct from '../../components/listProduct.vue';
+import listItemHome from '../../components/listItemHome.vue';
 import searchedProduct from '../../components/searchedProduct.vue';
 
 export default {
-  components: { listProduct, searchedProduct},
+  components: { listItemHome, searchedProduct},
     data() {
         return {
             brand: null,

@@ -253,7 +253,6 @@ p {
 .slider-holder {
     width: 500px;
     height: 500px;
-    background-color: yellow;
     text-align: center;
     overflow: hidden;
 }

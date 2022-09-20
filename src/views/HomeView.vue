@@ -1,3 +1,50 @@
+<script>
+import ListItemHome from '../../components/listItemHome.vue';
+import searchedProduct from '../../components/searchedProduct.vue';
+
+export default {
+  components: { ListItemHome, searchedProduct },
+  data() {
+    return {
+      name: null,
+      brand: null,
+      price: null,
+      description: null,
+      location: null,
+      productDataArray: [],
+      productArray: [],
+      findproductArray: []
+    }
+  },
+  methods: {
+    async getPost() {
+      const response = await fetch(`http://localhost:3000/products`);
+      const data = await response.json();
+      this.productDataArray = data;
+    },
+    async findproductLists() {
+      console.log("filtered products");
+      const response = await fetch("http://localhost:3000/findproducts", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          brand: this.brand,
+          price: this.price,
+          location: this.location
+        })
+      })
+      const data = await response.json();
+      this.findproductArray = data;
+      this.$router.push({ name: 'home' });
+    },
+  },
+  mounted() {
+    this.getPost();
+  }
+}
+</script>
+
+  
 <template>
   <main>
     <!-- Heading  -->
@@ -5,11 +52,12 @@
       <div class="header-container__left">
         <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
           SellCell.</h1> <br>
-        <p>Where you can safely buy and sell your mobile devices.</p> <br><br> <button @click="$router.push('signup')" class="btn__sign-up" type="button">Sign Up
+        <p>Where you can safely buy and sell your mobile devices.</p> <br><br> <button @click="$router.push('signup')"
+          class="btn__sign-up" type="button">Sign Up
           Now</button>
       </div>
       <div class="header-container__right">
-        <img class="header-banner-image" src="src/img/header-guy.jpeg">
+        <!-- <img class="header-banner-image" src="src/img/header-guy.jpeg"> -->
       </div>
     </div>
 
@@ -22,7 +70,7 @@
           <input type="text" placeholder="Search Keyword" v-model="name">
         </div> -->
       </div>
-      
+
       <div class="search-bar__brand">
         <label>Brand</label>
         <select v-model="brand">
@@ -62,9 +110,8 @@
     <section class="mobile-listings">
       <h2>Mobile Listings found</h2>
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
-
-      <div class="list-product-page">
-      <searchedProduct v-for="findproduct of findproductArray" :findproduct-data="findproduct" />
+      <div class="list-product-page column-3">
+        <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product" />
       </div>
 
     </section>
@@ -133,42 +180,42 @@
 
 
 
-<script>
+<!-- <script>
 import searchedProduct from '../../components/searchedProduct.vue';
 
 export default {
-  components: { searchedProduct},
-    data() {
-        return {
-            brand: null,
-            price: null,
-            location: null,
-            productArray: [],
-            findproductArray: []
-        };
-    },
+  components: { searchedProduct },
+  data() {
+    return {
+      brand: null,
+      price: null,
+      location: null,
+      productArray: [],
+      findproductArray: []
+    };
+  },
 
-    methods: {
-        async findproductLists() {
-            console.log("filtered products");
-            const response = await fetch("http://localhost:3000/findproducts", {
-                    method: "POST",
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify({
-                        brand: this.brand,
-                        price: this.price,
-                        location: this.location
-                    })
-                })
-                const data = await response.json();
-                this.findproductArray = data;
-                this.$router.push({name: 'home'});
+  methods: {
+    async findproductLists() {
+      console.log("filtered products");
+      const response = await fetch("http://localhost:3000/findproducts", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          brand: this.brand,
+          price: this.price,
+          location: this.location
+        })
+      })
+      const data = await response.json();
+      this.findproductArray = data;
+      this.$router.push({ name: 'home' });
     },
 
   },
 }
 </script>
-
+ -->
 
 
 <style lang="scss">
@@ -181,11 +228,12 @@ $white: white;
 @mixin btn-theme {
   display: inline-block;
   justify-content: center;
-  margin-top: 1rem;
-  padding: 15px 1em;
+  // margin-top: 1rem;
+  padding: .8rem 3rem;
   background: $dark-blue;
   color: $white;
   cursor: pointer;
+  font-size: 1.2rem;
   border-radius: .3rem;
   text-align: center;
   font-size: 16px;
@@ -201,7 +249,7 @@ $white: white;
   background-color: $background-blue;
   display: flex;
   justify-content: space-between;
-  padding: 100px;
+  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
 
@@ -226,6 +274,7 @@ $white: white;
   }
 }
 
+
 .text-main-blue {
   color: $main-blue;
 }
@@ -236,36 +285,42 @@ li {
 }
 
 
-
-
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+
   &__left {
-    width: 600px;
-    padding-left: 6em;
+    width: 100%;
+    padding-left: 4em;
   }
+
   &__right {
-    width: 600px;
+    width: 100%;
     height: 400px;
-    img {
-      width: 600px;
-      height: 400px;
-    }
+    background-image: url(../img/header-guy.jpeg);
+    background-repeat: none;
+    background-size: cover;
+    background-position: center;
+
+    // img {
+    //   width: 100%;
+    //   height: auto;
+    // }
   }
+
   .btn__sign-up {
     @include btn-theme
   }
 }
 
-
 .search-bar {
-  padding: 20px;
+  // padding: 20px;
   width: 100%;
-  height: 10rem;
+  height: 6rem;
   background-color: $main-blue;
-  position: relative;
+  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -276,7 +331,8 @@ li {
   }
 
   .search-bar__keywords {
-    width: 100%;
+    // width: 100%;
+    padding: 1rem;
 
     input {
       width: 90%;
@@ -285,16 +341,10 @@ li {
     }
   }
 
-  .search-bar__brand, 
+  .search-bar__brand,
   .search-bar__price,
   .search-bar__location {
-    padding: 20px;
-    display:block;
-    color: white;
-
-    label {
-      margin-right: 1em;
-    }
+    padding: 1rem;
 
     select {
       text-decoration: none;
@@ -322,14 +372,19 @@ li {
   }
 
   .list-product-page {
-    box-sizing: border-box;
     width: 100%;
-    border: solid #5B6DCD 5px;
-    height: 500px;
+    // display: grid;
+    // grid-template-columns: repeat(4, minmax(100px, 1fr));
+    // grid-gap: 20px;
+    // padding: 50px
+  }
+
+  .column-3 {
+    width: 100%;
     display: flex;
-    align-items: center;
-    overflow-x: scroll;
-    padding: 2em 4em;
+    flex-wrap: wrap;
+    gap: 2em;
+    // padding: 0px 100px;
   }
 
   .btn__view-listing {
@@ -341,7 +396,7 @@ li {
   background-color: $background-blue;
   display: flex;
   justify-content: space-between;
-  padding: 100px;
+  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
 
@@ -368,7 +423,7 @@ li {
 
 .strip-banner__mobile-brands {
   background-color: white;
-  padding: 100px;
+  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
 
@@ -414,7 +469,7 @@ li {
   background-color: $background-blue;
   display: flex;
   justify-content: space-between;
-  padding: 100px;
+  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
 
@@ -438,6 +493,4 @@ li {
     @include btn-theme;
   }
 }
-
-
 </style>

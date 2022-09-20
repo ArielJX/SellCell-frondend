@@ -1,3 +1,51 @@
+
+<script>
+import ListItemHome from '../../components/listItemHome.vue';
+import searchedProduct from '../../components/searchedProduct.vue';
+export default {
+  components: { ListItemHome, searchedProduct },
+  data() {
+    return {
+      name: null,
+      brand: null,
+      price: null,
+      description: null,
+      location: null,
+      productDataArray: [],
+      findproductArray: []
+    }
+  },
+  methods: {
+    async getPost() {
+      const response = await fetch(`http://localhost:3000/products`);
+      const data = await response.json();
+      this.productDataArray = data;
+    },
+
+    async findproductLists() {
+      console.log("filtered products");
+      const response = await fetch("http://localhost:3000/findproducts", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          brand: this.brand,
+          price: this.price,
+          location: this.location
+        })
+      })
+      const data = await response.json();
+      this.findproductArray = data;
+      this.$router.push({ name: 'home' });
+    },
+  },
+  mounted() {
+    this.getPost();
+  }
+}
+</script>
+
+  
+
 <template>
   <main>
     <!-- Heading  -->
@@ -5,7 +53,8 @@
       <div class="header-container__left">
         <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
           SellCell.</h1> <br>
-        <p>Where you can safely buy and sell your mobile devices.</p> <br><br> <button @click="$router.push('signup')" class="btn__sign-up" type="button">Sign Up
+        <p>Where you can safely buy and sell your mobile devices.</p> <br><br> <button @click="$router.push('signup')"
+          class="btn__sign-up" type="button">Sign Up
           Now</button>
       </div>
       <div class="header-container__right">
@@ -56,7 +105,6 @@
       <listItemHome v-if="!showing" v-for="product of productArray" :product-data="product" />
       <searchedProduct v-else v-for="findproduct of findproductArray" :findproduct-data="findproduct" />
       </div>
-
     </section>
 
 
@@ -171,7 +219,6 @@ export default {
 </script>
 
 
-
 <style lang="scss">
 $main-blue: #184DD1;
 $dark-blue: #003489;
@@ -237,29 +284,30 @@ li {
 }
 
 
-
-
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   &__left {
     width: 600px;
     padding-left: 6em;
   }
+
   &__right {
     width: 600px;
     height: 400px;
+
     img {
       width: 600px;
       height: 400px;
     }
   }
+
   .btn__sign-up {
     @include btn-theme
   }
 }
-
 
 .search-bar {
   padding: 20px;
@@ -277,11 +325,11 @@ li {
   }
 
 
-  .search-bar__brand, 
+  .search-bar__brand,
   .search-bar__price,
   .search-bar__location {
     padding: 20px;
-    display:block;
+    display: block;
     color: white;
 
     label {
@@ -308,20 +356,16 @@ li {
   padding-bottom: 30px;
 
   h2,
-
   p {
     padding-bottom: 15px;
   }
 
   .list-product-page {
-    box-sizing: border-box;
     width: 100%;
-    border: solid #5B6DCD 5px;
-    height: 500px;
-    display: flex;
-    align-items: center;
-    overflow-x: scroll;
-    padding: 2em 4em;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    grid-gap: 20px;
+    padding: 50px
   }
 
   .btn__view-listing {
@@ -430,6 +474,4 @@ li {
     @include btn-theme;
   }
 }
-
-
 </style>

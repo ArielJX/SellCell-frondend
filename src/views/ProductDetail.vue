@@ -90,7 +90,7 @@
 
 
 <script>
-import messageContent from '../../components/messageContent.vue';
+import messageContent from '../components/messageContent.vue';
 export default {
 components: { messageContent },
     data() {

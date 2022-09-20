@@ -15,7 +15,7 @@
             <h5>$ {{productData.price}}</h5>
             </div>
             <div class="subtitle-container">
-            <button @click="$router.push(`/product/${productData._id}`)" id="profile-view-button" class="blue-button"
+            <button @click="$router.push(`/ProductforBuyer/${productData._id}`)" id="profile-view-button" class="blue-button"
                 type="button">View</button>
             </div>
         </div>

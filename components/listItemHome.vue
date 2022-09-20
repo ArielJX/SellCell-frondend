@@ -1,7 +1,8 @@
+
     <template>
         <div class="item-box">
             <div>
-                <img src="../src/image/iphone13.png" alt="">
+                <img :src="`data:image/png;base64,${productData.image.data}`" alt=""/>
             </div>
             <div class="subtitle-container">
                 <span>{{productData.location}}</span>

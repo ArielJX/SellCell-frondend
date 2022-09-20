@@ -65,13 +65,7 @@ export default {
 
 
     <!-- Search bar -->
-    <section class="search-bar">
-      <div class="search-bar__container">
-        <!-- <div class="search-bar__keywords">
-          <input type="text" placeholder="Search Keyword" v-model="name">
-        </div> -->
-      </div>
-
+    <section class="search-bar">      
       <div class="search-bar__brand">
         <label>Brand</label>
         <select v-model="brand">
@@ -102,19 +96,14 @@ export default {
     </section>
 
 
-    <!-- All Mobile listings -->
-
-
-
-
-    <!--Searched Mobile listings -->
+    <!--All Mobile listings & Searched Mobile listings -->
     <section class="mobile-listings">
       <h2>Mobile Listings found</h2>
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
 
       <div class="list-product-page">
-        <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product" />
-        <searchedProduct v-for="findproduct of findproductArray" :findproduct-data="findproduct" />
+      <listItemHome v-if="!showing" v-for="product of productArray" :product-data="product" />
+      <searchedProduct v-else v-for="findproduct of findproductArray" :findproduct-data="findproduct" />
       </div>
     </section>
 
@@ -180,6 +169,54 @@ export default {
   </main>
 </template>
 
+
+
+<script>
+import listItemHome from '../../components/listItemHome.vue';
+import searchedProduct from '../../components/searchedProduct.vue';
+
+export default {
+  components: { listItemHome, searchedProduct},
+    data() {
+        return {
+            brand: null,
+            price: null,
+            location: null,
+            productArray: [],
+            findproductArray: [],
+            showing: false
+        };
+    },
+
+    methods: {
+      async getItem() {
+            const response = await fetch(`http://localhost:3000/products`);
+            const data = await response.json();
+            this.productArray = data;
+        },
+
+        async findproductLists() {
+            console.log("filtered products");
+            const response = await fetch("http://localhost:3000/findproducts", {
+                    method: "POST",
+                    headers: { "content-type": "application/json" },
+                    body: JSON.stringify({
+                        brand: this.brand,
+                        price: this.price,
+                        location: this.location
+                    })
+                })
+                const data = await response.json();
+                this.findproductArray = data;
+                this.showing = true;
+    },
+
+  },
+  mounted() {
+    this.getItem()
+  }
+}
+</script>
 
 
 <style lang="scss">
@@ -287,15 +324,6 @@ li {
     @include btn-theme
   }
 
-  .search-bar__keywords {
-    width: 100%;
-
-    input {
-      width: 90%;
-      display: inline-block;
-      padding: 10px;
-    }
-  }
 
   .search-bar__brand,
   .search-bar__price,

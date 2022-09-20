@@ -46,9 +46,40 @@
 </template>
 
 <script>
-import listProduct from '../../components/profileItem.vue';
+import ProfileItem from "../../components/profileItem.vue";
 export default {
+    components: {
+        ProfileItem,
+    },
+    data() {
+        return {
+            name: null,
+            price: null,
+            location: null,
+            productArray: []
+        };
+    },
+    methods: {
+        async getItem() {
+            const response = await fetch(`http://localhost:3000/products`);
+            const data = await response.json();
+            this.productArray = data;
+        },
+        async deleteItem(id) {
+            const response = await fetch(`http://localhost:3000/products/${id}`, {
+                method: "DELETE"
+            });
+            const data = await response.json();
 
+            this.getItem();
+        },
+        // removeElement: function (index) {
+        //     this.$delete(this.items, index);
+        // }
+    },
+    mounted() {
+        this.getItem();
+    }
 }
 </script>
 
@@ -80,10 +111,9 @@ export default {
 
 .white-h2 {
     color: white;
-    font-size: 38px;
+    font-size: 2em;
     margin: 4px auto;
     align-self: center;
-    text-shadow: 4px 4px 6px black;;
 }
 
 .border-container {
@@ -108,6 +138,8 @@ export default {
 }
 
 .item-box {
+    max-width: 240px;
+    flex: 1 1 30%;
     border: 1px solid gainsboro;
     border-radius: 6px;
     padding-bottom: 1em;
@@ -115,7 +147,7 @@ export default {
 
 img {
     width: 100%;
-    border-radius: 6px 6px;
+    border-radius: 6px;
 }
 
 .subtitle-container {
@@ -206,6 +238,10 @@ span {
 button {
     height: 24px;
     margin: auto 6px;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 .blue-button {

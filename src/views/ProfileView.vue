@@ -9,7 +9,7 @@
 
                     <h3 class="center">Sell items Listings</h3>
                     <button id="profile-list-button" class="white-button center" type="button"
-                        @click="$router.push('listProduct')">List new item</button>
+                        @click="$router.push('/listProduct')">List new item</button>
                 </div>
                 <div class="column-3 center">
                     <ProfileItem @delete-item="deleteItem" v-for="product of productArray" :product-data="product"
@@ -46,17 +46,36 @@
 </template>
 
 <script>
-import listProduct from '../../components/profileItem.vue';
+import profileItem from '../../components/profileItem.vue';
 export default {
-
-            this.getItem();
-        },
-       
+    components: {profileItem},
+    data() {
+        return {
+            name: null,
+            price: null,
+            location: null,
+            productArray:[]
+        };
     },
-    mounted() {
+    method: {
+        async getItem() {
+            const response = await fetch(`http://localhost:3000/products`);
+            const data = await response.json();
+            this.productArray = data;
+        },
+        async deleteItem(id) {
+            const response = await fetch(`http://localhost:3000/products/${id}`,
+            {method: "DELETE"});
+        const data = await response.json();
+
         this.getItem();
+
+    },
+},
+mounted() {
+    this.getItem();
     }
-}
+}    
 </script>
 
 <style scoped>

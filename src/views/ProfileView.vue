@@ -46,9 +46,9 @@
 </template>
 
 <script>
-import profileItem from '../../components/profileItem.vue';
+import ProfileItem from '../components/profileItem.vue';
 export default {
-    components: {profileItem},
+    components: {ProfileItem},
     data() {
         return {
             name: null,
@@ -57,7 +57,7 @@ export default {
             productArray:[]
         };
     },
-    method: {
+    methods: {
         async getItem() {
             const response = await fetch(`http://localhost:3000/products`);
             const data = await response.json();

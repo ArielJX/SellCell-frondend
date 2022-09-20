@@ -1,51 +1,4 @@
 
-<script>
-import ListItemHome from '../../components/listItemHome.vue';
-import searchedProduct from '../../components/searchedProduct.vue';
-export default {
-  components: { ListItemHome, searchedProduct },
-  data() {
-    return {
-      name: null,
-      brand: null,
-      price: null,
-      description: null,
-      location: null,
-      productDataArray: [],
-      findproductArray: []
-    }
-  },
-  methods: {
-    async getPost() {
-      const response = await fetch(`http://localhost:3000/products`);
-      const data = await response.json();
-      this.productDataArray = data;
-    },
-
-    async findproductLists() {
-      console.log("filtered products");
-      const response = await fetch("http://localhost:3000/findproducts", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          brand: this.brand,
-          price: this.price,
-          location: this.location
-        })
-      })
-      const data = await response.json();
-      this.findproductArray = data;
-      this.$router.push({ name: 'home' });
-    },
-  },
-  mounted() {
-    this.getPost();
-  }
-}
-</script>
-
-  
-
 <template>
   <main>
     <!-- Heading  -->
@@ -58,7 +11,7 @@ export default {
           Now</button>
       </div>
       <div class="header-container__right">
-        <img class="header-banner-image" src="src/img/header-guy.jpeg">
+        <img class="header-banner-image" src="src/image/header-guy.jpeg">
       </div>
     </div>
 
@@ -79,7 +32,13 @@ export default {
       </div>
       <div class="search-bar__price">
         <label>Price</label>
-        <input type="number" v-model="price">
+        <select v-model="price">
+          <option disabled selected>Price</option>
+          <option>below $500</option>
+          <option>$500 - $1000</option>
+          <option>$1000 - $2000</option>
+          <option>Above $2000</option>
+        </select>
       </div>
       <div class="search-bar__location">
         <label>Location</label>
@@ -118,7 +77,7 @@ export default {
         <br> <br>
         <button class="btn__marketplace">See The Process</button>
       </div>
-      <img src="src/img/strip-marketplace.png">
+      <img src="src/image/strip-marketplace.png">
     </div>
 
     <div class="strip-banner__mobile-brands">
@@ -129,21 +88,21 @@ export default {
       <div class="container__mobile-brands-flexbox">
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/apple.png">
+            <img src="src/image/apple.png">
           </div>
           <p>Apple</p>
         </div>
 
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/samsung.png">
+            <img src="src/image/samsung.png">
           </div>
           <p>Samsung</p>
         </div>
 
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/huawei.png">
+            <img src="src/image/huawei.png">
           </div>
           <p>Huawei</p>
         </div>
@@ -164,7 +123,7 @@ export default {
         <br> <br>
         <button class="btn__mobile-experts">See The Process</button>
       </div>
-      <img src="src/img/strip-experts.png" alt="">
+      <img src="src/image/strip-experts.png" alt="">
     </div>
   </main>
 </template>
@@ -172,8 +131,8 @@ export default {
 
 
 <script>
-import listItemHome from '../../components/listItemHome.vue';
-import searchedProduct from '../../components/searchedProduct.vue';
+import listItemHome from '../components/listItemHome.vue';
+import searchedProduct from '../components/searchedProduct.vue';
 
 export default {
   components: { listItemHome, searchedProduct},
@@ -196,7 +155,6 @@ export default {
         },
 
         async findproductLists() {
-            console.log("filtered products");
             const response = await fetch("http://localhost:3000/findproducts", {
                     method: "POST",
                     headers: { "content-type": "application/json" },

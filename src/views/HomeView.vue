@@ -1,4 +1,3 @@
-
 <template>
   <main>
     <!-- Heading  -->
@@ -52,7 +51,7 @@
           <option>Other</option>
         </select>
       </div>
-      <button @click="findproductLists" class="btn__search">Search My Phone</button>
+      <button @click="findproductLists" class="btn__search"><span>Search My Phone</span></button>
     </section>
 
 
@@ -86,20 +85,20 @@
       <div class="container__mobile-brands-gridbox">
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/apple.png">
+            <img src="src/image/apple.png">
           </div>
           <p>Apple</p>
         </div>
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/samsung.png">
+            <img src="src/image/samsung.png">
           </div>
           <p>Samsung</p>
         </div>
 
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/huawei.png">
+            <img src="src/image/huawei.png">
           </div>
           <p>Huawei</p>
         </div>
@@ -193,12 +192,6 @@ $white: white;
   font-weight: 500;
   text-align: center;
 
-  // @media (max-width: 700px) {
-  //   font-size: 12px;
-  //   padding: 8px 1em;
-  //   border-radius: 5px;
-  // }
-
   &:hover {
     background: $main-blue;
   }
@@ -228,6 +221,18 @@ $white: white;
   }
 }
 
+h1,
+h2 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+p {
+  font-family: sans-serif;
+}
+
+span {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 .text-main-blue {
   color: $main-blue;
@@ -257,7 +262,7 @@ $white: white;
   &__right {
     width: 100%;
     height: 100%;
-    background-image: url(../img/header-guy.jpeg);
+    background-image: url(../image/header-guy.jpeg);
     background-repeat: none;
     background-size: cover;
     background-position: center;
@@ -334,7 +339,7 @@ $white: white;
   &-right {
     width: 100%;
     height: 100%;
-    background-image: url(../img/strip-marketplace.png);
+    background-image: url(../image/strip-marketplace.png);
     background-repeat: none;
     background-size: cover;
     background-position: center;
@@ -342,7 +347,7 @@ $white: white;
     .image-wrapper {
       width: 100%;
       height: 100%;
-      background-image: url(../img/strip-experts.png);
+      background-image: url(../image/strip-experts.png);
       background-repeat: none;
       background-size: cover;
       background-position: center;

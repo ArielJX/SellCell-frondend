@@ -49,6 +49,7 @@ export default {
 
 
 label {
+    font-family: sans-serif;
     font-size: 20px;
 }
 
@@ -75,10 +76,15 @@ input {
     gap: 1em;
 }
 
+h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 span,
 a {
     margin: 8px 2px;
     font-size: 18px;
+    font-family: sans-serif;
 }
 
 a:hover {
@@ -92,6 +98,7 @@ button {
     border-radius: 2px;
     padding: 1em 2em;
     margin-bottom: 4em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 16px;
 }
 </style>

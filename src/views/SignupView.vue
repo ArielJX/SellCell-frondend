@@ -35,31 +35,31 @@
 <script>
 export default {
   data() {
-        return {
-            username: null,
-            email: null,
-            password: null,
-            confirm_password: null,
-            registerArray: []
-            };
-},
-methods: {
-        async registerForm() {
-            console.log("register form");
-            const response = await fetch("http://localhost:3000/register", {
-                    method: "POST",
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify({
-                        username: this.username,
-                        email: this.email,
-                        password:this.password,
-                        confirm_password:this.confirm_password
-                    })
-                });
-            const data = await response.text();
-            },
-          }
-        }
+    return {
+      username: null,
+      email: null,
+      password: null,
+      confirm_password: null,
+      registerArray: []
+    };
+  },
+  methods: {
+    async registerForm() {
+      console.log("register form");
+      const response = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          username: this.username,
+          email: this.email,
+          password: this.password,
+          confirm_password: this.confirm_password
+        })
+      });
+      const data = await response.text();
+    },
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -72,6 +72,10 @@ methods: {
   justify-content: center;
 }
 
+h2 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 span {
   margin-bottom: 4em;
 }
@@ -82,6 +86,7 @@ input {
 }
 
 label {
+  font-family: sans-serif;
   font-size: 20px;
 }
 
@@ -119,6 +124,7 @@ button {
   border-radius: 2px;
   padding: 1em 2em;
   margin-bottom: 4em;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 16px;
 }
 </style>

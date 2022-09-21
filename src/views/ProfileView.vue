@@ -209,6 +209,12 @@ img {
     margin-bottom: 1.5em;
 }
 
+h2,
+h3,
+h4 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 h3 {
     font-size: 26px;
 }
@@ -232,6 +238,7 @@ span {
 }
 
 button {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     height: 24px;
     margin: auto 6px;
 }

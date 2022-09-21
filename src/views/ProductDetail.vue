@@ -1,12 +1,11 @@
 <template>
     <div v-if="productObject" class="information-box">
         <div class="slider-holder">
-                <img :src="`data:image/png;base64,${productObject.image.data}`" alt="" class="slider-image"/>
+            <img :src="`data:image/png;base64,${productObject.image.data}`" alt="" class="slider-image" />
         </div>
 
         <div class="product-detail">
             <h1>{{productObject.name}}</h1>
-            <h3>Details</h3>
             <div class="product-details">
                 <div v-if="!editing" class="detail-box">
                     <label for="name">Name: </label>
@@ -65,23 +64,24 @@
     <div class="chat__box">
         <h1>Question & Answer</h1>
         <div class="chat__content">
-        <div class="chat__box--buyer">
-            <img class="profile__img" src="https://wallpaperaccess.com/full/6295120.jpg">
-            <p class="profile__comment">Hi does the phone come with a charger?</p>
-        </div>
+            <div class="chat__box--buyer">
+                <img class="profile__img" src="https://wallpaperaccess.com/full/6295120.jpg">
+                <p class="profile__comment">Hi does the phone come with a charger?</p>
+            </div>
 
-        <div class="chat__box--seller">
-            <p class="profile__comment">Yes, it does come with charger :)</p>
-            <img class="profile__img" src="https://wallpaperaccess.com/full/3804420.jpg">
-        </div>
-        <div class="realchat">
-            <messageContent v-for="message of messageArray" :message-data="message" :key="message.id" />
-        </div>
+            <div class="chat__box--seller">
+                <p class="profile__comment">Yes, it does come with charger :)</p>
+                <img class="profile__img" src="https://wallpaperaccess.com/full/3804420.jpg">
+            </div>
+            <div class="realchat">
+                <messageContent v-for="message of messageArray" :message-data="message" :key="message.id" />
+            </div>
         </div>
 
         <form class="chat__box--form">
             <input class="chat__box--input" placeholder="username" type="text" name="username" v-model="username">
-            <input class="chat__box--input" placeholder="type message here" type="text" name="message" v-model="message" >
+            <input class="chat__box--input" placeholder="type message here" type="text" name="message"
+                v-model="message">
             <button class="send__button" @click="submitMessage" type="button">Send</button>
         </form>
     </div>
@@ -92,7 +92,7 @@
 <script>
 import messageContent from '../components/messageContent.vue';
 export default {
-components: { messageContent },
+    components: { messageContent },
     data() {
         return {
             editing: false,
@@ -141,55 +141,65 @@ components: { messageContent },
                 method: "DELETE"
             });
             const data = await response.json();
-            this.$router.push({name: 'profile'});
+            this.$router.push({ name: 'profile' });
         },
-        
+
         async submitMessage() {
             console.log("submit message");
             const response = await fetch("http://localhost:3000/userMessage", {
-                    method: "POST",
-                    headers: { "content-type": "application/json" },
-                    body: JSON.stringify({
-                        username: this.username,
-                        message: this.message
-                    })
-                });
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                    username: this.username,
+                    message: this.message
+                })
+            });
             const data = await response.text();
             this.getMessageLists();
 
-            },
-            async getMessageLists() {
+        },
+        async getMessageLists() {
             const response = await fetch("http://localhost:3000/userMessage");
             const data = await response.json();
             this.messageArray = data;
+        },
     },
-    },
-    
+
     mounted() {
         this.getSinglePost();
-        this.getMessageLists();    
+        this.getMessageLists();
     }
 }
 </script>
 
 
 <style lang="scss" scoped>
-    .information-box {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 1000px;
-        padding:2em 2em 3em 2em;
-        margin: auto;
-    }
+.information-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+    padding: 2em 2em 3em 2em;
+    margin: auto;
+}
 
 .detail-box {
     display: flex;
     align-items: center;
     padding: 0.5em 0;
+
+    label {
+        font-family: sans-serif;
+        margin-right: 1rem;
+    }
+}
+
+h3 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 p {
+    font-family: sans-serif;
     font-size: 18px;
     margin: 0;
 }
@@ -273,26 +283,41 @@ p {
     margin: auto;
     margin-bottom: 4em;
     padding: 2em;
+
+    p {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    &--buyer {
+        display: flex;
+        align-items: center;
+        gap: 2em;
+        margin-left: 2em;
+    }
+
+    &--seller {
+        display: flex;
+        align-items: center;
+        gap: 2em;
+        margin: 1em 0 0 36em;
+    }
+
+    &--form {
+        margin-left: 12em;
+        margin-top: 1em;
+        margin-bottom: 2em;
+    }
+
+    &--input {
+        height: 30px;
+        width: 260px;
+    }
 }
 
 h1 {
     text-align: center;
     margin: 1em 0;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.chat__box--buyer {
-    display: flex;
-    align-items: center;
-    gap: 2em;
-    margin-left: 2em;
-}
-
-.chat__box--seller {
-    display: flex;
-    align-items: center;
-    gap: 2em;
-    margin: 1em 0 0 36em;
 }
 
 .profile__img {
@@ -303,12 +328,6 @@ h1 {
 
 .profile__comment {
     font-size: 20px;
-}
-
-.chat__box--form {
-margin-left: 12em;
-margin-top: 1em;
-margin-bottom: 2em;
 }
 
 .send__button {
@@ -324,15 +343,9 @@ margin-bottom: 2em;
     cursor: pointer;
 }
 
-.chat__box--input {
-    height: 30px;
-    width: 260px;
-}
-
 .chat__content {
-  height: 400px;
-  width: 1000px;
-  overflow-y: scroll;
+    height: 400px;
+    width: 1000px;
+    overflow-y: scroll;
 }
-
 </style>

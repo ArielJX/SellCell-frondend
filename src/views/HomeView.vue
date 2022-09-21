@@ -30,22 +30,22 @@ export default {
   <main>
     <div class="header-container">
       <div class="header-container__left">
-        <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
-          SellCell.</h1>
-        <p>Where you can safely buy and sell your mobile devices.</p>
-        <button class="btn__sign-up">Sign Up
-          Now</button>
+        <div class="content-box">
+          <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
+            SellCell.</h1>
+          <p>Where you can safely buy and sell your mobile devices.</p>
+          <button class="btn__sign-up">
+            <span>Sign Up
+              Now</span>
+          </button>
+        </div>
+
       </div>
       <div class="header-container__right">
         <!-- <img class="header-banner-image" src="src/img/header-guy.jpeg"> -->
       </div>
     </div>
     <section class="search-bar">
-      <div class="search-bar__container">
-        <div class="search-bar__keywords">
-          <input type="text" placeholder="Search Keyword">
-        </div>
-      </div>
       <div class="search-bar__brand">
         <select>
           <option value="" disabled selected>Brand</option>
@@ -85,14 +85,14 @@ export default {
       </div>
     </section>
 
-    <div class="strip-banner__marketplace">
-      <div class="strip-banner__marketplace-left">
+    <div class="strip-banner">
+      <div class="strip-banner-left">
         <h2>New Zealand's Most Trusted, <span class="text-main-blue">Marketplace</span> for selling and buying mobile
           phones.</h2>
         <p>Never worry about engaging with scammers, Never worry about buying fake, authentic mobile phones.</p>
-        <button class="btn__marketplace">See The Process</button>
+        <button class="btn"><span>See The Process</span></button>
       </div>
-      <div class="strip-banner__marketplace-right"></div>
+      <div class="strip-banner-right"></div>
       <!-- <img src="src/img/strip-marketplace.png"> -->
     </div>
 
@@ -101,7 +101,7 @@ export default {
         <h2>Mobile Brands</h2>
         <p>Full range of mobile phones to suit your preference and taste.</p>
       </div>
-      <div class="container__mobile-brands-flexbox">
+      <div class="container__mobile-brands-gridbox">
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
             <img src="src/img/apple.png">
@@ -128,13 +128,13 @@ export default {
       </div>
     </div>
 
-    <div class="strip-banner__marketplace">
-      <div class="strip-banner__marketplace-left">
+    <div class="strip-banner">
+      <div class="strip-banner-left">
         <h2>Get your phones checked by our <span class="text-main-blue">Mobile Experts</span></h2>
         <p>Participate in making NZ Green by selling your preloved devices</p>
-        <button class="btn__marketplace">See The Process</button>
+        <button class="btn"><span>See The Process</span></button>
       </div>
-      <div class="strip-banner__marketplace-right">
+      <div class="strip-banner-right">
         <div class="image-wrapper"></div>
         <!-- <img src="src/img/strip-experts.png" alt=""> -->
       </div>
@@ -162,11 +162,11 @@ $white: white;
   font-weight: 500;
   text-align: center;
 
-  @media (max-width: 700px) {
-    font-size: 12px;
-    padding: 8px 1em;
-    border-radius: 5px;
-  }
+  // @media (max-width: 700px) {
+  //   font-size: 12px;
+  //   padding: 8px 1em;
+  //   border-radius: 5px;
+  // }
 
   &:hover {
     background: $main-blue;
@@ -180,7 +180,7 @@ $white: white;
   width: 100%;
   margin: 0 auto 0 auto;
 
-  .container__marketplace {
+  .container {
     padding-right: 15px;
   }
 
@@ -192,7 +192,7 @@ $white: white;
     margin-right: 15px;
   }
 
-  .btn__marketplace {
+  .btn {
     @include btn-theme;
   }
 }
@@ -206,17 +206,20 @@ $white: white;
   width: 100%;
   height: 400px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-
-  &__left {
+  .header-container__left {
     width: 100%;
-    padding-left: 4em;
 
-    h1,
-    p {
-      margin-bottom: 2rem;
+    .content-box {
+      padding: 4em;
+
+      h1,
+      p {
+        margin-bottom: 2rem;
+      }
     }
   }
 
@@ -232,31 +235,8 @@ $white: white;
   .btn__sign-up {
     @include btn-theme
   }
-
-
-
 }
 
-@media (max-width: 700px) {
-  h1 {
-    font-size: 22px;
-    margin-bottom: 1em;
-  }
-
-  p {
-    margin-bottom: 1em;
-  }
-
-  .header-container {
-    height: 300px;
-
-    &__left {
-      padding-left: 2em;
-
-
-    }
-  }
-}
 
 .search-bar {
   width: 100%;
@@ -265,19 +245,10 @@ $white: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 
   .btn__search {
     @include btn-theme
-  }
-
-  .search-bar__keywords {
-    padding: 1rem;
-
-    input {
-      width: 90%;
-      display: inline-block;
-      padding: 10px;
-    }
   }
 
   .search-bar__brand,
@@ -313,7 +284,7 @@ $white: white;
   }
 }
 
-.strip-banner__marketplace {
+.strip-banner {
   background-color: $background-blue;
   display: flex;
   align-items: center;
@@ -354,7 +325,7 @@ $white: white;
     margin-right: 15px;
   }
 
-  .btn__marketplace {
+  .btn {
     @include btn-theme;
   }
 }
@@ -371,7 +342,7 @@ $white: white;
     align-items: center;
   }
 
-  .container__mobile-brands-flexbox {
+  .container__mobile-brands-gridbox {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 2rem;
@@ -397,6 +368,51 @@ $white: white;
           height: 100%;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+
+  .header-container {
+    height: 600px;
+    position: relative;
+
+    &__left {
+      position: absolute;
+
+      .content-box {
+        padding: 1em;
+
+        h1,
+        p,
+        .text-main-blue {
+          color: white;
+        }
+
+        .text-main-blue {
+          font-size: 46px;
+        }
+      }
+    }
+  }
+
+  .search-bar {
+
+    .search-bar__brand,
+    .search-bar__price,
+    .search-bar__location {
+      padding: 8px;
+
+      select {
+        padding: 6px;
+      }
+    }
+  }
+
+  .strip-banner {
+    &-right {
+      display: none;
     }
   }
 }

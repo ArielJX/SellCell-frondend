@@ -1,40 +1,14 @@
-<script>
-import ListItemHome from '../../components/listItemHome.vue';
-export default {
-  components: { ListItemHome },
-  data() {
-    return {
-      name: null,
-      brand: null,
-      price: null,
-      description: null,
-      location: null,
-      productDataArray: [],
-    }
-  },
-  methods: {
-    async getPost() {
-      const response = await fetch(`http://localhost:3000/products`);
-      const data = await response.json();
-      this.productDataArray = data;
-    },
-  },
-  mounted() {
-    this.getPost();
-  }
-}
-</script>
 
-  
 <template>
   <main>
+    <!-- Heading  -->
     <div class="header-container">
       <div class="header-container__left">
         <div class="content-box">
           <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
             SellCell.</h1>
           <p>Where you can safely buy and sell your mobile devices.</p>
-          <button class="btn__sign-up">
+          <button @click="$router.push('signup')" class="btn__sign-up" type="button">
             <span>Sign Up
               Now</span>
           </button>
@@ -47,41 +21,49 @@ export default {
     </div>
     <section class="search-bar">
       <div class="search-bar__brand">
-        <select>
-          <option value="" disabled selected>Brand</option>
-          <option value="1">Iphone</option>
-          <option value="2">Samsung</option>
-          <option value="3">Huawei</option>
-          <option value="4">Other</option>
+        <label>Brand</label>
+        <select v-model="brand">
+          <option disabled selected>Brand</option>
+          <option>Apple</option>
+          <option>Oppo</option>
+          <option>Samsung</option>
+          <option>Huawei</option>
+          <option>Other</option>
         </select>
       </div>
       <div class="search-bar__price">
-        <select>
-          <option value="" disabled selected>Price</option>
-          <option value="1">$400 - $699</option>
-          <option value="2">$700 - $999</option>
-          <option value="3">$1000 - $1299</option>
-          <option value="4">$1300 +</option>
+        <label>Price</label>
+        <select v-model="price">
+          <option disabled selected>Price</option>
+          <option>below $500</option>
+          <option>$500 - $1000</option>
+          <option>$1000 - $2000</option>
+          <option>Above $2000</option>
         </select>
       </div>
       <div class="search-bar__location">
-        <select>
-          <option value="" disabled selected>Location</option>
-          <option value="1">Auckland</option>
-          <option value="2">Wellington</option>
-          <option value="3">Hamilton</option>
-          <option value="4">Christchurch</option>
-          <option value="5">Other</option>
+        <label>Location</label>
+        <select v-model="location">
+          <option disabled selected>Location</option>
+          <option>Auckland</option>
+          <option>Wellington</option>
+          <option>Hamilton</option>
+          <option>Christchurch</option>
+          <option>Other</option>
         </select>
       </div>
-      <button class="btn__search">Search My Phone</button>
+      <button @click="findproductLists" class="btn__search">Search My Phone</button>
     </section>
 
+
+    <!--All Mobile listings & Searched Mobile listings -->
     <section class="mobile-listings">
-      <h2>Mobile Listings</h2>
+      <h2>Mobile Listings found</h2>
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
-      <div class="list-product-page column-3">
-        <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product" />
+
+      <div class="list-product-page columns">
+        <listItemHome v-if="!showing" v-for="product of productArray" :product-data="product" />
+        <searchedProduct v-else v-for="findproduct of findproductArray" :findproduct-data="findproduct" />
       </div>
     </section>
 
@@ -142,6 +124,55 @@ export default {
     </div>
   </main>
 </template>
+
+
+
+<script>
+import listItemHome from '../components/listItemHome.vue';
+import searchedProduct from '../components/searchedProduct.vue';
+
+export default {
+  components: { listItemHome, searchedProduct },
+  data() {
+    return {
+      brand: null,
+      price: null,
+      location: null,
+      productArray: [],
+      findproductArray: [],
+      showing: false
+    };
+  },
+
+  methods: {
+    async getItem() {
+      const response = await fetch(`http://localhost:3000/products`);
+      const data = await response.json();
+      this.productArray = data;
+    },
+
+    async findproductLists() {
+      const response = await fetch("http://localhost:3000/findproducts", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          brand: this.brand,
+          price: this.price,
+          location: this.location
+        })
+      })
+      const data = await response.json();
+      this.findproductArray = data;
+      this.showing = true;
+    },
+
+  },
+  mounted() {
+    this.getItem()
+  }
+}
+</script>
+
 
 <style lang="scss">
 $main-blue: #184DD1;
@@ -248,6 +279,7 @@ $white: white;
   flex-wrap: wrap;
 
   .btn__search {
+    margin-left: 2em;
     @include btn-theme
   }
 
@@ -271,7 +303,7 @@ $white: white;
     padding-top: 15px;
   }
 
-  .column-3 {
+  .columns {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -356,6 +388,8 @@ $white: white;
       align-items: center;
       flex-direction: column;
       border-radius: .5rem;
+      padding: 3rem;
+      gap: 1.5rem;
 
       .mobile-brands-image {
         max-width: 80px;

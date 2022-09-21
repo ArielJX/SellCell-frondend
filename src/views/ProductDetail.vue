@@ -1,22 +1,7 @@
 <template>
-    <div class="information-box">
+    <div v-if="productObject" class="information-box">
         <div class="slider-holder">
-            <span id="slider-image-1"></span>
-            <span id="slider-image-2"></span>
-            <span id="slider-image-3"></span>
-            <div class="image-holder">
-                <img src="https://i.ebayimg.com/images/g/YHEAAOSwE8xhxhIb/s-l500.jpg" class="slider-image"
-                    style="width:500px; height: 500px" />
-                <img src="https://apollo-singapore.akamaized.net/v1/files/a3lu6gpelqn63-IN/image;s=850x0"
-                    class="slider-image" style="width:500px; height: 500px" />
-                <img src="https://cellbuddy.in/wp-content/uploads/2021/09/Apple-iPhone-13-Smartphone-491997702-i-2-1200Wx1200H.jpeg"
-                    class="slider-image" style="width:500px; height: 500px" />
-            </div>
-            <div class="button-holder">
-                <a href="#slider-image-1" class="slider-change"></a>
-                <a href="#slider-image-2" class="slider-change"></a>
-                <a href="#slider-image-3" class="slider-change"></a>
-            </div>
+                <img :src="`data:image/png;base64,${productObject.image.data}`" alt="" class="slider-image"/>
         </div>
 
         <div class="product-detail">
@@ -38,11 +23,11 @@
                 <div v-else class="detail-box">
                     <label for="brand">Brand: </label>
                     <select name="brand" id="brand" v-model="brand">
-                        <option value="apple">Apple</option>
-                        <option value="samsung">Samsung</option>
-                        <option value="huawei">Huawei</option>
-                        <option value="oppo">Oppo</option>
-                        <option value="nokia">Nokia</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="Oppo">Oppo</option>
+                        <option value="Nokia">Nokia</option>
                     </select>
                 </div>
                 <div v-if="!editing" class="detail-box">
@@ -105,7 +90,7 @@
 
 
 <script>
-import messageContent from '../../components/messageContent.vue';
+import messageContent from '../components/messageContent.vue';
 export default {
 components: { messageContent },
     data() {
@@ -116,7 +101,7 @@ components: { messageContent },
             price: null,
             description: null,
             location: null,
-            productObject: {},
+            productObject: null,
             username: null,
             message: null,
             messageArray: []
@@ -147,7 +132,6 @@ components: { messageContent },
             });
             const data = await response.json();
             this.productObject = data;
-            console.log(this.productObject.name);
             this.$router.push({ name: 'product', params: { id: this.$route.params.id } })
             this.editing = false;
         },
@@ -269,64 +253,14 @@ p {
 .slider-holder {
     width: 500px;
     height: 500px;
-    background-color: yellow;
     text-align: center;
     overflow: hidden;
 }
 
-.image-holder {
-    width: 1500px;
-    height: 500px;
-    clear: both;
-    position: relative;
-
-    -webkit-transition: left 1s;
-    -moz-transition: left 1s;
-    -o-transition: left 1s;
-    transition: left 1s;
-}
-
 .slider-image {
-    float: left;
-    margin: 0px;
-    padding: 0px;
-    position: relative;
-}
-
-a:hover {
-    background-color: rgb(193, 193, 193);
-}
-
-a:active {
-    background-color: rgb(193, 193, 193) !important;
-}
-
-#slider-image-1:target~.image-holder {
-    left: 0px;
-}
-
-#slider-image-2:target~.image-holder {
-    left: -500px;
-}
-
-#slider-image-3:target~.image-holder {
-    left: -1000px;
-}
-
-.button-holder {
-    position: relative;
-    top: -60px;
-}
-
-
-.slider-change {
-    display: inline-block;
-    height: 15px;
-    width: 15px;
-    border-radius: 30px;
-    border: 3px solid rgb(193, 193, 193);
-    background-color: white;
-    margin-right: 1em;
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
 }
 
 

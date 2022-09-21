@@ -6,14 +6,14 @@
             </div>
             <div class="border-container">
                 <div class="title-container">
+
                     <h3 class="center">Sell items Listings</h3>
                     <button id="profile-list-button" class="white-button center" type="button"
-                        @click="$router.push('listProduct')">List new item</button>
+                        @click="$router.push('/listProduct')">List new item</button>
                 </div>
                 <div class="column-3 center">
                     <ProfileItem @delete-item="deleteItem" v-for="product of productArray" :product-data="product"
                         :key="product.id" />
-
                 </div>
             </div>
         </div>
@@ -46,11 +46,9 @@
 </template>
 
 <script>
-import ProfileItem from "../../components/profileItem.vue";
+import ProfileItem from '../components/profileItem.vue';
 export default {
-    components: {
-        ProfileItem,
-    },
+    components: { ProfileItem },
     data() {
         return {
             name: null,
@@ -66,19 +64,18 @@ export default {
             this.productArray = data;
         },
         async deleteItem(id) {
-            const response = await fetch(`http://localhost:3000/products/${id}`, {
-                method: "DELETE"
-            });
+            const response = await fetch(`http://localhost:3000/products/${id}`,
+                { method: "DELETE" });
             const data = await response.json();
 
             this.getItem();
-        },
 
+        },
     },
     mounted() {
         this.getItem();
     }
-}
+}    
 </script>
 
 <style scoped>
@@ -134,7 +131,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
-
 }
 
 .item-box {

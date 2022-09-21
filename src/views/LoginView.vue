@@ -18,7 +18,7 @@
                 </a>
             </div>
         </div>
-        <button class="mt-1 center" type="button">Login</button>
+        <button class="mt-1 center" type="button">Log in</button>
     </div>
 </template>
 

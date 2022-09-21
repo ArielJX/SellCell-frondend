@@ -48,7 +48,7 @@
 <script>
 import ProfileItem from '../components/profileItem.vue';
 export default {
-    components: {ProfileItem},
+    components: { ProfileItem },
     data() {
         return {
             name: null,
@@ -80,6 +80,7 @@ export default {
 },
 mounted() {
     this.getItem();
+    this.getUser();
     }
 }    
 </script>

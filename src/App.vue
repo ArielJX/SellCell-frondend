@@ -1,6 +1,30 @@
-<script setup>
+<script>
   import { RouterLink, RouterView } from 'vue-router'
-  
+  export default {
+    data() {
+        return {
+          LoggedIn: false,
+          LoggedOut: true
+            };
+},
+methods: {
+        isUserLoggedIn() {
+          if (localStorage.getItem('token') != null) {
+          this.LoggedIn = true,
+          this.LoggedOut = false
+        } 
+            },
+        isUserLoggedOut() {
+          localStorage.clear();
+          this.LoggedIn= false,
+          this.LoggedOut = true
+        }
+            },
+            created() {
+            this.isUserLoggedIn,
+            this.isUserLoggedOut
+          }
+          }
   </script>
   
   <template>
@@ -10,16 +34,17 @@
       <nav>
         <a href="/"><img src="../src/image/logo.png" alt="logo"></a>
         <div class="nav-link">
-          <RouterLink to="/">Home</RouterLink>
-          <RouterLink to="/login">Login</RouterLink>
-          <RouterLink to="/profile">Profile</RouterLink>        
+          <RouterLink v-if="!LoggedIn, LoggedOut" to="/">Home</RouterLink>
+          <RouterLink v-if="!LoggedIn, LoggedOut" to="/login">Login</RouterLink>
+          <RouterLink v-if="LoggedIn" to="/profile/:id">Profile</RouterLink>              
+          <RouterLink v-if="!LoggedOut, LoggedIn" to="/">Log out</RouterLink>       
         </div>
       </nav>
       <hr>
   
     </header>
   
-    <RouterView />
+    <RouterView @UserLoggedIn="isUserLoggedIn" @UserLoggedOut="isUserLoggedOut" />
   
   </div>
     <footer>

@@ -31,8 +31,9 @@ export default {
     <div class="header-container">
       <div class="header-container__left">
         <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
-          SellCell.</h1> <br>
-        <p>Where you can safely buy and sell your mobile devices.</p> <br><br> <button class="btn__sign-up">Sign Up
+          SellCell.</h1>
+        <p>Where you can safely buy and sell your mobile devices.</p>
+        <button class="btn__sign-up">Sign Up
           Now</button>
       </div>
       <div class="header-container__right">
@@ -85,15 +86,14 @@ export default {
     </section>
 
     <div class="strip-banner__marketplace">
-      <div class="container__marketplace">
+      <div class="strip-banner__marketplace-left">
         <h2>New Zealand's Most Trusted, <span class="text-main-blue">Marketplace</span> for selling and buying mobile
           phones.</h2>
-        <br>
         <p>Never worry about engaging with scammers, Never worry about buying fake, authentic mobile phones.</p>
-        <br> <br>
         <button class="btn__marketplace">See The Process</button>
       </div>
-      <img src="src/img/strip-marketplace.png">
+      <div class="strip-banner__marketplace-right"></div>
+      <!-- <img src="src/img/strip-marketplace.png"> -->
     </div>
 
     <div class="strip-banner__mobile-brands">
@@ -108,7 +108,6 @@ export default {
           </div>
           <p>Apple</p>
         </div>
-
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
             <img src="src/img/samsung.png">
@@ -129,15 +128,17 @@ export default {
       </div>
     </div>
 
-    <div class="strip-banner__mobile-experts">
-      <div class="container__mobile-experts">
+    <div class="strip-banner__marketplace">
+      <div class="strip-banner__marketplace-left">
         <h2>Get your phones checked by our <span class="text-main-blue">Mobile Experts</span></h2>
-        <br>
         <p>Participate in making NZ Green by selling your preloved devices</p>
-        <br> <br>
-        <button class="btn__mobile-experts">See The Process</button>
+        <button class="btn__marketplace">See The Process</button>
       </div>
-      <img src="src/img/strip-experts.png" alt="">
+      <div class="strip-banner__marketplace-right">
+        <div class="image-wrapper"></div>
+        <!-- <img src="src/img/strip-experts.png" alt=""> -->
+      </div>
+
     </div>
   </main>
 </template>
@@ -152,15 +153,20 @@ $white: white;
 @mixin btn-theme {
   display: inline-block;
   justify-content: center;
-  // margin-top: 1rem;
-  padding: .8rem 3rem;
+  padding: .8rem 2rem;
   background: $dark-blue;
   color: $white;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: .3rem;
   font-weight: 500;
   text-align: center;
+
+  @media (max-width: 700px) {
+    font-size: 12px;
+    padding: 8px 1em;
+    border-radius: 5px;
+  }
 
   &:hover {
     background: $main-blue;
@@ -171,16 +177,11 @@ $white: white;
   background-color: $background-blue;
   display: flex;
   justify-content: space-between;
-  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
 
   .container__marketplace {
     padding-right: 15px;
-  }
-
-  img {
-    height: 300px;
   }
 
   h1 {
@@ -202,6 +203,8 @@ $white: white;
 }
 
 .header-container {
+  width: 100%;
+  height: 400px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -210,33 +213,55 @@ $white: white;
   &__left {
     width: 100%;
     padding-left: 4em;
+
+    h1,
+    p {
+      margin-bottom: 2rem;
+    }
   }
 
   &__right {
     width: 100%;
-    height: 400px;
+    height: 100%;
     background-image: url(../img/header-guy.jpeg);
     background-repeat: none;
     background-size: cover;
     background-position: center;
-
-    // img {
-    //   width: 100%;
-    //   height: auto;
-    // }
   }
 
   .btn__sign-up {
     @include btn-theme
   }
+
+
+
+}
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 22px;
+    margin-bottom: 1em;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  .header-container {
+    height: 300px;
+
+    &__left {
+      padding-left: 2em;
+
+
+    }
+  }
 }
 
 .search-bar {
-  // padding: 20px;
   width: 100%;
   height: 6rem;
   background-color: $main-blue;
-  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,7 +271,6 @@ $white: white;
   }
 
   .search-bar__keywords {
-    // width: 100%;
     padding: 1rem;
 
     input {
@@ -270,32 +294,18 @@ $white: white;
 }
 
 .mobile-listings {
-  padding-top: 30px;
-  padding-bottom: 30px;
-
-  h2,
-  p {
-    padding-left: 100px;
-  }
-
-  p {
-    padding-bottom: 15px;
-  }
+  padding: 4rem;
 
   .list-product-page {
-    width: 100%;
-    // display: grid;
-    // grid-template-columns: repeat(4, minmax(100px, 1fr));
-    // grid-gap: 20px;
-    // padding: 50px
+    padding-top: 15px;
   }
 
   .column-3 {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     gap: 2em;
-    // padding: 0px 100px;
   }
 
   .btn__view-listing {
@@ -306,17 +316,34 @@ $white: white;
 .strip-banner__marketplace {
   background-color: $background-blue;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  // padding: 100px;
   width: 100%;
-  margin: 0 auto 0 auto;
+  height: 300px;
+  margin: 4rem 0 0 0;
 
-  .container__marketplace {
-    padding-right: 15px;
+  &-left {
+    width: 100%;
+    padding: 2rem 4rem;
+    margin: 0 auto;
   }
 
-  img {
-    height: 300px;
+  &-right {
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/strip-marketplace.png);
+    background-repeat: none;
+    background-size: cover;
+    background-position: center;
+
+    .image-wrapper {
+      width: 100%;
+      height: 100%;
+      background-image: url(../img/strip-experts.png);
+      background-repeat: none;
+      background-size: cover;
+      background-position: center;
+    }
   }
 
   h1 {
@@ -334,9 +361,8 @@ $white: white;
 
 .strip-banner__mobile-brands {
   background-color: white;
-  // padding: 100px;
+  margin: 4rem auto;
   width: 100%;
-  margin: 0 auto 0 auto;
 
   h2,
   p {
@@ -348,23 +374,22 @@ $white: white;
   .container__mobile-brands-flexbox {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2em;
-    padding: 5em;
-    flex: 1 0 0;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
+    padding: 0 15%;
 
     .mobile-brands-detail {
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       border-radius: .5rem;
-      padding: 3rem;
-      gap: 1.5rem;
 
       .mobile-brands-image {
-        display: block;
-        width: 100%;
-        height: 150px;
-        padding: 1rem;
+        max-width: 80px;
+        width: 80%;
+        height: auto;
 
         img {
           object-fit: contain;
@@ -373,35 +398,6 @@ $white: white;
         }
       }
     }
-  }
-}
-
-.strip-banner__mobile-experts {
-  background-color: $background-blue;
-  display: flex;
-  justify-content: space-between;
-  // padding: 100px;
-  width: 100%;
-  margin: 0 auto 0 auto;
-
-  .container__mobile-experts {
-    padding-right: 15px;
-  }
-
-  img {
-    height: 300px;
-  }
-
-  h1 {
-    margin: 0;
-  }
-
-  p {
-    margin-right: 15px;
-  }
-
-  .btn__mobile-experts {
-    @include btn-theme;
   }
 }
 </style>

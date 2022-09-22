@@ -15,8 +15,7 @@
             <p>$ {{price}}</p>
         </div>
         <div class="subtitle-container"><button @click="$router.push(`/ProductforBuyer/${findproductData._id}`)"
-                class="detail-btn" type="button">See
-                details</button></div>
+                class="blue-button" type="button">View</button></div>
     </div>
 </template>
 
@@ -88,13 +87,6 @@ button:hover {
     padding: 4px 1.5em;
 }
 
-.white-button {
-    color: #1950DA;
-    background: white;
-    border: #1950DA 1px solid;
-    border-radius: 4px;
-    padding: 4px 1em;
-}
 
 h3 {
     font-size: 28px;

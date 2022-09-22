@@ -57,6 +57,8 @@ export default {
         })
       });
       const data = await response.text();
+      this.$router.push('/login');
+      alert("Registered Succefully, please log in.")
     },
   }
 }

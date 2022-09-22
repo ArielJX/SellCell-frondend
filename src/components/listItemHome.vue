@@ -1,7 +1,7 @@
 
     <template>
         <div class="item-box">
-            <div>
+            <div class="img-wrapper">
                 <img :src="`data:image/png;base64,${productData.image.data}`" alt=""/>
             </div>
             <div class="subtitle-container">
@@ -49,9 +49,16 @@ export default {
     padding-bottom: 1em;
     }
 
-    img {
+    .img-wrapper {
     width: 100%;
-    border-radius: 3px;
+    height: 160px;
+}
+
+    img {
+        width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
     }
 
     .subtitle-container {
@@ -65,6 +72,7 @@ export default {
     }
 
     button {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     height: 24px;
     margin: auto 6px;
     }
@@ -81,13 +89,6 @@ export default {
     padding: 4px 1.5em;
     }
 
-    .white-button {
-    color: #1950DA;
-    background: white;
-    border: #1950DA 1px solid;
-    border-radius: 4px;
-    padding: 4px 1em;
-    }
 
     h3 {
     font-size: 28px;

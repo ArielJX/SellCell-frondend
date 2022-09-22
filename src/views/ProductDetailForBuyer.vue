@@ -6,62 +6,28 @@
             </div>
 
             <div class="product-detail">
-                <h1>{{productObject.name}}</h1>
+                <h1>Iphone X</h1>
                 <div class="product-details">
-                    <div v-if="!editing" class="detail-box">
+                    <div class="detail-box">
                         <label for="name">Name: </label>
                         <p class="name">{{productObject.name}}</p>
                     </div>
-                    <div v-else class="detail-box">
-                        <label for="name">Name: </label>
-                        <input type="text" id="name" v-model="name">
-                    </div>
-                    <div v-if="!editing" class="detail-box">
+                    <div class="detail-box">
                         <label for="brand">Brand: </label>
                         <p class="brand">{{productObject.brand}}</p>
                     </div>
-                    <div v-else class="detail-box">
-                        <label for="brand">Brand: </label>
-                        <select name="brand" id="brand" v-model="brand">
-                            <option value="Apple">Apple</option>
-                            <option value="Samsung">Samsung</option>
-                            <option value="Huawei">Huawei</option>
-                            <option value="Oppo">Oppo</option>
-                            <option value="Nokia">Nokia</option>
-                        </select>
-                    </div>
-                    <div v-if="!editing" class="detail-box">
+                    <div class="detail-box">
                         <label for="price">Price: </label>
                         <p class="price">{{productObject.price}}</p>
                     </div>
-                    <div v-else class="detail-box">
-                        <label for="price">Price: </label>
-                        <input type="text" name="" id="price" v-model="price">
-                    </div>
                 </div>
                 <h3>Description</h3>
-                <p v-if="!editing" class="description">{{productObject.description}}</p>
-                <textarea v-else id="description" cols="40" rows="7" v-model="description"></textarea>
+                <p class="description">{{productObject.description}}</p>
                 <h3>Location</h3>
-                <p v-if="!editing" class="location">{{productObject.location}}</p>
-                <select v-else name="location" id="location" v-model="location">
-                    <option value="auckland">Auckland</option>
-                    <option value="hamilton">Hamilton</option>
-                    <option value="wellington">Wellington</option>
-                    <option value="Christchurch">Christchurch</option>
-                </select>
-                <div v-if="!editing" class="buttons">
-                    <button @click="editPost" class="edit-button" type="button">Edit</button>
-                    <button class="delete-button" type="button" @click="deletePost">Delete</button>
-                </div>
-                <div v-else class="buttons">
-                    <button class="save-button" @click="updatePost" type="button">Save</button>
-                    <button @click="editing = false" class="cancel-button">Cancel</button>
-                </div>
+                <p class="location">{{productObject.location}}</p>
             </div>
         </div>
     </div>
-
     <div class="container">
         <div class="chat__box">
             <h1>Question & Answer</h1>
@@ -90,15 +56,12 @@
     </div>
 </template>
 
-
-
 <script>
 import messageContent from '../components/messageContent.vue';
 export default {
     components: { messageContent },
     data() {
         return {
-            editing: false,
             name: null,
             brand: null,
             price: null,
@@ -111,40 +74,10 @@ export default {
         }
     },
     methods: {
-        editPost() {
-            this.editing = true
-        },
-
         async getSinglePost() {
             const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`);
             const data = await response.json();
             this.productObject = data;
-        },
-
-        async updatePost() {
-            const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`, {
-                method: "PUT",
-                headers: { 'content-type': 'application/json' },
-                body: JSON.stringify({
-                    name: this.name,
-                    brand: this.brand,
-                    price: this.price,
-                    description: this.description,
-                    location: this.location
-                })
-            });
-            const data = await response.json();
-            this.productObject = data;
-            this.$router.push({ name: 'product', params: { id: this.$route.params.id } })
-            this.editing = false;
-        },
-
-        async deletePost() {
-            const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`, {
-                method: "DELETE"
-            });
-            const data = await response.json();
-            this.$router.push({ name: 'profile' });
         },
 
         async submitMessage() {
@@ -159,7 +92,6 @@ export default {
             });
             const data = await response.text();
             this.getMessageLists();
-            location.reload();
 
         },
         async getMessageLists() {
@@ -175,7 +107,6 @@ export default {
     }
 }
 </script>
-
 
 <style lang="scss" scoped>
 .container {

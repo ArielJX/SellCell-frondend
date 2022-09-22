@@ -2,25 +2,25 @@
     <div class="profile">
         <div class="profile-left">
             <div class="profile-bg-wrapper">
-                <h2 class="white-h2">Welcome Back Sharon</h2>
+                <h2 class="white-h2">Welcome Back {{userObject.username}}</h2>
             </div>
             <div class="border-container">
                 <div class="title-container">
+
                     <h3 class="center">Sell items Listings</h3>
                     <button id="profile-list-button" class="white-button center" type="button"
-                        @click="$router.push('listProduct')">List new item</button>
+                        @click="$router.push('/listProduct')">List new item</button>
                 </div>
                 <div class="column-3 center">
                     <ProfileItem @delete-item="deleteItem" v-for="product of productArray" :product-data="product"
                         :key="product.id" />
-
                 </div>
             </div>
         </div>
         <div class="profile-right">
             <div class="img-wrapper center"></div>
             <div class="profile-detail center">
-                <h3 class="center">Sharon Smith</h3>
+                <h3 class="center" name="username">{{userObject.username}}</h3>
                 <div class="stars center">
                     <img class="star" src="../image/star-solid.svg" alt="">
                     <img class="star" src="../image/star-solid.svg" alt="">
@@ -46,39 +46,45 @@
 </template>
 
 <script>
-import ProfileItem from "../../components/profileItem.vue";
+import ProfileItem from '../components/profileItem.vue';
 export default {
-    components: {
-        ProfileItem,
-    },
+    components: { ProfileItem },
     data() {
         return {
             name: null,
             price: null,
             location: null,
-            productArray: []
+            productArray: [],
+            userObject: {}
         };
     },
     methods: {
+        async getUser() {
+            const response = await fetch(`http://localhost:3000/login/${this.$route.params.id}`);
+            const data = await response.json();
+            this.userObject = data;
+        },
         async getItem() {
             const response = await fetch(`http://localhost:3000/products`);
             const data = await response.json();
             this.productArray = data;
         },
         async deleteItem(id) {
-            const response = await fetch(`http://localhost:3000/products/${id}`, {
-                method: "DELETE"
-            });
+            const response = await fetch(`http://localhost:3000/products/${id}`,
+                { method: "DELETE" });
             const data = await response.json();
 
             this.getItem();
+
         },
-       
     },
+
     mounted() {
         this.getItem();
+        this.getUser();
+
     }
-}
+}  
 </script>
 
 <style scoped>
@@ -112,7 +118,8 @@ export default {
     font-size: 38px;
     margin: 4px auto;
     align-self: center;
-    text-shadow: 4px 4px 6px black;;
+    text-shadow: 4px 4px 6px black;
+    ;
 }
 
 .border-container {
@@ -133,7 +140,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 1em;
-
 }
 
 .item-box {
@@ -212,6 +218,12 @@ img {
     margin-bottom: 1.5em;
 }
 
+h2,
+h3,
+h4 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 h3 {
     font-size: 26px;
 }
@@ -235,6 +247,7 @@ span {
 }
 
 button {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     height: 24px;
     margin: auto 6px;
 }

@@ -1,76 +1,24 @@
-<script>
-import ListItemHome from '../../components/listItemHome.vue';
-import searchedProduct from '../../components/searchedProduct.vue';
-
-export default {
-  components: { ListItemHome, searchedProduct },
-  data() {
-    return {
-      name: null,
-      brand: null,
-      price: null,
-      description: null,
-      location: null,
-      productDataArray: [],
-      productArray: [],
-      findproductArray: []
-    }
-  },
-  methods: {
-    async getPost() {
-      const response = await fetch(`http://localhost:3000/products`);
-      const data = await response.json();
-      this.productDataArray = data;
-    },
-    async findproductLists() {
-      console.log("filtered products");
-      const response = await fetch(`http://localhost:3000/findproducts`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          brand: this.brand,
-          price: this.price,
-          location: this.location
-        })
-      })
-      const data = await response.json();
-      this.findproductArray = data;
-      this.$router.push({ name: 'home' });
-    },
-  },
-  mounted() {
-    this.getPost();
-  }
-}
-</script>
-
-  
 <template>
   <main>
     <!-- Heading  -->
     <div class="header-container">
       <div class="header-container__left">
-        <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
-          SellCell.</h1> <br>
-        <p>Where you can safely buy and sell your mobile devices.</p> <br><br> <button @click="$router.push('signup')"
-          class="btn__sign-up" type="button">Sign Up
-          Now</button>
+        <div class="content-box">
+          <h1 class="header-headline">Find A <span class="text-main-blue"> Perfect Phone</span> For <br> Yourself With
+            SellCell.</h1>
+          <p>Where you can safely buy and sell your mobile devices.</p>
+          <button @click="$router.push('signup')" class="btn__sign-up" type="button">
+            <span>Sign Up
+              Now</span>
+          </button>
+        </div>
+
       </div>
       <div class="header-container__right">
         <!-- <img class="header-banner-image" src="src/img/header-guy.jpeg"> -->
       </div>
     </div>
-
-
-
-    <!-- Search bar -->
     <section class="search-bar">
-      <div class="search-bar__container">
-        <!-- <div class="search-bar__keywords">
-          <input type="text" placeholder="Search Keyword" v-model="name">
-        </div> -->
-      </div>
-
       <div class="search-bar__brand">
         <label>Brand</label>
         <select v-model="brand">
@@ -84,7 +32,13 @@ export default {
       </div>
       <div class="search-bar__price">
         <label>Price</label>
-        <input type="number" v-model="price">
+        <select v-model="price">
+          <option disabled selected>Price</option>
+          <option>below $500</option>
+          <option>$500 - $1000</option>
+          <option>$1000 - $2000</option>
+          <option>Above $2000</option>
+        </select>
       </div>
       <div class="search-bar__location">
         <label>Location</label>
@@ -97,37 +51,30 @@ export default {
           <option>Other</option>
         </select>
       </div>
-      <button @click="findproductLists" class="btn__search">Search My Phone</button>
+      <button @click="findproductLists" class="btn__search"><span>Search My Phone</span></button>
     </section>
 
 
-    <!-- All Mobile listings -->
-
-
-
-
-    <!--Searched Mobile listings -->
+    <!--All Mobile listings & Searched Mobile listings -->
     <section class="mobile-listings">
       <h2>Mobile Listings found</h2>
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
-      <div class="list-product-page column-3">
-        <listItemHome v-for="product of productDataArray" :key="product.id" :product-data="product" />
-      </div>
 
+      <div class="list-product-page columns">
+        <listItemHome v-if="!showing" v-for="product of productArray" :product-data="product" />
+        <searchedProduct v-else v-for="findproduct of findproductArray" :findproduct-data="findproduct" />
+      </div>
     </section>
 
-
-    <!-- Marketplace banner -->
-    <div class="strip-banner__marketplace">
-      <div class="container__marketplace">
+    <div class="strip-banner">
+      <div class="strip-banner-left">
         <h2>New Zealand's Most Trusted, <span class="text-main-blue">Marketplace</span> for selling and buying mobile
           phones.</h2>
-        <br>
         <p>Never worry about engaging with scammers, Never worry about buying fake, authentic mobile phones.</p>
-        <br> <br>
-        <button class="btn__marketplace">See The Process</button>
+        <button class="btn"><span>See The Process</span></button>
       </div>
-      <img src="src/img/strip-marketplace.png">
+      <div class="strip-banner-right"></div>
+      <!-- <img src="src/img/strip-marketplace.png"> -->
     </div>
 
     <div class="strip-banner__mobile-brands">
@@ -135,24 +82,23 @@ export default {
         <h2>Mobile Brands</h2>
         <p>Full range of mobile phones to suit your preference and taste.</p>
       </div>
-      <div class="container__mobile-brands-flexbox">
+      <div class="container__mobile-brands-gridbox">
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/apple.png">
+            <img src="src/image/apple.png">
           </div>
           <p>Apple</p>
         </div>
-
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/samsung.png">
+            <img src="src/image/samsung.png">
           </div>
           <p>Samsung</p>
         </div>
 
         <div class="mobile-brands-detail">
           <div class="mobile-brands-image">
-            <img src="src/img/huawei.png">
+            <img src="src/image/huawei.png">
           </div>
           <p>Huawei</p>
         </div>
@@ -163,41 +109,48 @@ export default {
       </div>
     </div>
 
-
-    <!-- Mobile expert banner -->
-    <div class="strip-banner__mobile-experts">
-      <div class="container__mobile-experts">
+    <div class="strip-banner">
+      <div class="strip-banner-left">
         <h2>Get your phones checked by our <span class="text-main-blue">Mobile Experts</span></h2>
-        <br>
         <p>Participate in making NZ Green by selling your preloved devices</p>
-        <br> <br>
-        <button class="btn__mobile-experts">See The Process</button>
+        <button class="btn"><span>See The Process</span></button>
       </div>
-      <img src="src/img/strip-experts.png" alt="">
+      <div class="strip-banner-right">
+        <div class="image-wrapper"></div>
+        <!-- <img src="src/img/strip-experts.png" alt=""> -->
+      </div>
+
     </div>
   </main>
 </template>
 
 
 
-<!-- <script>
-import searchedProduct from '../../components/searchedProduct.vue';
+<script>
+import listItemHome from '../components/listItemHome.vue';
+import searchedProduct from '../components/searchedProduct.vue';
 
 export default {
-  components: { searchedProduct },
+  components: { listItemHome, searchedProduct },
   data() {
     return {
       brand: null,
       price: null,
       location: null,
       productArray: [],
-      findproductArray: []
+      findproductArray: [],
+      showing: false
     };
   },
 
   methods: {
+    async getItem() {
+      const response = await fetch(`http://localhost:3000/products`);
+      const data = await response.json();
+      this.productArray = data;
+    },
+
     async findproductLists() {
-      console.log("filtered products");
       const response = await fetch("http://localhost:3000/findproducts", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -209,14 +162,16 @@ export default {
       })
       const data = await response.json();
       this.findproductArray = data;
-      this.$router.push({ name: 'home' });
+      this.showing = true;
     },
 
   },
+  mounted() {
+    this.getItem()
+  }
 }
 </script>
  -->
-
 
 <style lang="scss">
 $main-blue: #184DD1;
@@ -228,17 +183,14 @@ $white: white;
 @mixin btn-theme {
   display: inline-block;
   justify-content: center;
-  // margin-top: 1rem;
-  padding: .8rem 3rem;
+  padding: .8rem 2rem;
   background: $dark-blue;
   color: $white;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: .3rem;
+  font-weight: 500;
   text-align: center;
-  font-size: 16px;
-  border: none;
-  border: 1px solid white;
 
   &:hover {
     background: $main-blue;
@@ -249,16 +201,11 @@ $white: white;
   background-color: $background-blue;
   display: flex;
   justify-content: space-between;
-  // padding: 100px;
   width: 100%;
   margin: 0 auto 0 auto;
 
-  .container__marketplace {
+  .container {
     padding-right: 15px;
-  }
-
-  img {
-    height: 300px;
   }
 
   h1 {
@@ -269,45 +216,56 @@ $white: white;
     margin-right: 15px;
   }
 
-  .btn__marketplace {
+  .btn {
     @include btn-theme;
   }
 }
 
+h1,
+h2 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+p {
+  font-family: sans-serif;
+}
+
+span {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 .text-main-blue {
   color: $main-blue;
 }
 
-li {
-  list-style-type: none;
-  margin-right: 2em;
-}
-
-
 .header-container {
+  width: 100%;
+  height: 400px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-
-  &__left {
+  .header-container__left {
     width: 100%;
-    padding-left: 4em;
+
+    .content-box {
+      padding: 4em;
+
+      h1,
+      p {
+        margin-bottom: 2rem;
+      }
+    }
   }
 
   &__right {
     width: 100%;
-    height: 400px;
-    background-image: url(../img/header-guy.jpeg);
+    height: 100%;
+    background-image: url(../image/header-guy.jpeg);
     background-repeat: none;
     background-size: cover;
     background-position: center;
-
-    // img {
-    //   width: 100%;
-    //   height: auto;
-    // }
   }
 
   .btn__sign-up {
@@ -315,30 +273,19 @@ li {
   }
 }
 
+
 .search-bar {
-  // padding: 20px;
   width: 100%;
   height: 6rem;
   background-color: $main-blue;
-  // position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 
   .btn__search {
     margin-left: 2em;
     @include btn-theme
-  }
-
-  .search-bar__keywords {
-    // width: 100%;
-    padding: 1rem;
-
-    input {
-      width: 90%;
-      display: inline-block;
-      padding: 10px;
-    }
   }
 
   .search-bar__brand,
@@ -350,41 +297,23 @@ li {
       text-decoration: none;
       display: inline-block;
       padding: 10px;
-      width: 150px;
-    }
-
-    input {
-      display: inline-block;
-      padding: 10px;
-      width: 120px;
     }
   }
 }
 
 .mobile-listings {
-  padding-top: 30px;
-  padding-bottom: 30px;
-
-  h2,
-
-  p {
-    padding-bottom: 15px;
-  }
+  padding: 4rem;
 
   .list-product-page {
-    width: 100%;
-    // display: grid;
-    // grid-template-columns: repeat(4, minmax(100px, 1fr));
-    // grid-gap: 20px;
-    // padding: 50px
+    padding-top: 15px;
   }
 
-  .column-3 {
+  .columns {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     gap: 2em;
-    // padding: 0px 100px;
   }
 
   .btn__view-listing {
@@ -392,20 +321,37 @@ li {
   }
 }
 
-.strip-banner__marketplace {
+.strip-banner {
   background-color: $background-blue;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  // padding: 100px;
   width: 100%;
-  margin: 0 auto 0 auto;
+  height: 300px;
+  margin: 4rem 0 0 0;
 
-  .container__marketplace {
-    padding-right: 15px;
+  &-left {
+    width: 100%;
+    padding: 2rem 4rem;
+    margin: 0 auto;
   }
 
-  img {
-    height: 300px;
+  &-right {
+    width: 100%;
+    height: 100%;
+    background-image: url(../image/strip-marketplace.png);
+    background-repeat: none;
+    background-size: cover;
+    background-position: center;
+
+    .image-wrapper {
+      width: 100%;
+      height: 100%;
+      background-image: url(../image/strip-experts.png);
+      background-repeat: none;
+      background-size: cover;
+      background-position: center;
+    }
   }
 
   h1 {
@@ -416,16 +362,15 @@ li {
     margin-right: 15px;
   }
 
-  .btn__marketplace {
+  .btn {
     @include btn-theme;
   }
 }
 
 .strip-banner__mobile-brands {
   background-color: white;
-  // padding: 100px;
+  margin: 4rem auto;
   width: 100%;
-  margin: 0 auto 0 auto;
 
   h2,
   p {
@@ -434,26 +379,27 @@ li {
     align-items: center;
   }
 
-  .container__mobile-brands-flexbox {
+  .container__mobile-brands-gridbox {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2em;
-    padding: 5em;
-    flex: 1 0 0;
+    gap: 2rem;
     justify-content: center;
     align-items: center;
+    padding: 0 15%;
 
     .mobile-brands-detail {
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       border-radius: .5rem;
       padding: 3rem;
       gap: 1.5rem;
 
       .mobile-brands-image {
-        display: block;
-        width: 100%;
-        height: 150px;
-        padding: 1rem;
+        max-width: 80px;
+        width: 80%;
+        height: auto;
 
         img {
           object-fit: contain;
@@ -465,32 +411,48 @@ li {
   }
 }
 
-.strip-banner__mobile-experts {
-  background-color: $background-blue;
-  display: flex;
-  justify-content: space-between;
-  // padding: 100px;
-  width: 100%;
-  margin: 0 auto 0 auto;
+@media (max-width: 700px) {
 
-  .container__mobile-experts {
-    padding-right: 15px;
+  .header-container {
+    height: 600px;
+    position: relative;
+
+    &__left {
+      position: absolute;
+
+      .content-box {
+        padding: 1em;
+
+        h1,
+        p,
+        .text-main-blue {
+          color: white;
+        }
+
+        .text-main-blue {
+          font-size: 46px;
+        }
+      }
+    }
   }
 
-  img {
-    height: 300px;
+  .search-bar {
+
+    .search-bar__brand,
+    .search-bar__price,
+    .search-bar__location {
+      padding: 8px;
+
+      select {
+        padding: 6px;
+      }
+    }
   }
 
-  h1 {
-    margin: 0;
-  }
-
-  p {
-    margin-right: 15px;
-  }
-
-  .btn__mobile-experts {
-    @include btn-theme;
+  .strip-banner {
+    &-right {
+      display: none;
+    }
   }
 }
 </style>

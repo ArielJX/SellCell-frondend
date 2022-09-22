@@ -1,13 +1,13 @@
 <template>
     <div class="phone">
         <div class="phone-box">
-            <p class="name"><b>Name:</b>{{ findproductData.name }}</p>
-            <p class="brand"><b>Brand</b>{{ findproductData.brand }}</p>
+            <img :src="`data:image/png;base64,${findproductData.image.data}`" alt=""/>
+            <p class="name">{{ findproductData.name }}</p>
+            <p class="brand"><b>Brand:</b>{{ findproductData.brand }}</p>
             <p class="price"><b>price:$</b>{{ findproductData.price }}</p>
-            <p class="nickName"><b>Description:</b>{{ findproductData.description }}</p>
-            <p class="nickName"><b>Location:</b>{{ findproductData.location }}</p>
+            <p class="location"><b>Location:</b>{{ findproductData.location }}</p>
         </div>
-        <button class="detail-btn" type="button">See details</button>
+        <button @click="$router.push(`/ProductforBuyer/${findproductData._id}`)" class="detail-btn" type="button">See details</button>
     </div>
 </template>
 
@@ -21,7 +21,6 @@ export default {
             name: this.findproductData.name,
             brand: this.findproductData.brand,
             price: this.findproductData.price,
-            description: this.findproductData.description,
             location: this.findproductData.location,
         }
     },
@@ -34,8 +33,10 @@ export default {
         justify-content: center;
         text-align: center;
     }
-    .photo, .image {
-        height: 80px;
+    img {
+        height: 100px;
+        width: 80px;
+        object-fit: cover;
     }
 .phone-box {
     border: 1px solid gainsboro;

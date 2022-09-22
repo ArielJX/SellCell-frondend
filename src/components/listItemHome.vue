@@ -1,7 +1,8 @@
+
     <template>
         <div class="item-box">
             <div>
-                <img src="../src/image/iphone13.png" alt="">
+                <img :src="`data:image/png;base64,${productData.image.data}`" alt=""/>
             </div>
             <div class="subtitle-container">
                 <span>{{productData.location}}</span>
@@ -14,7 +15,7 @@
             <h5>$ {{productData.price}}</h5>
             </div>
             <div class="subtitle-container">
-            <button @click="$router.push(`/product/${productData._id}`)" id="profile-view-button" class="blue-button"
+            <button @click="$router.push(`/ProductforBuyer/${productData._id}`)" id="profile-view-button" class="blue-button"
                 type="button">View</button>
             </div>
         </div>

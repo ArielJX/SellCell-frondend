@@ -5,11 +5,11 @@
         <div class="login-box center">
             <div class="login-box--info">
                 <label>User Name</label>
-                <input type="text">
+                <input type="text" name="username" v-model="username">
             </div>
             <div class="login-box--info">
                 <label>Password</label>
-                <input type="text">
+                <input type="text" name="password" v-model="password">
             </div>
             <div class="info">
                 <span>Don't have an account?</span>
@@ -18,14 +18,45 @@
                 </a>
             </div>
         </div>
-        <button class="mt-1 center" type="button">Log in</button>
+        <button class="mt-1 center" @click="loginForm" type="button">Log in</button>
     </div>
 </template>
 
 <script>
 export default {
-
+    data() {
+        return {
+            username: null,
+            password: null,
+        };
+    },
+    methods: {
+        async loginForm() {
+            console.log("login form sent");
+            const response = await fetch("http://localhost:3000/login", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                    username: this.username,
+                    password: this.password
+                })
+            });
+            const data = await response.json();
+            console.log(data.message)
+            localStorage.setItem("token", data.token);
+            if (data.token) {
+                const savedUserId = data._id;
+                this.$router.push({ name: "profile", params: { id: savedUserId } });
+                alert("hello" + " " + data.username)
+                this.$emit("UserLoggedIn", "UserLoggedOut")
+            } else if (data.message && localStorage.getItem("token")) {
+                alert(data.message);
+                localStorage.clear()
+            }
+        },
+    }
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -49,6 +80,7 @@ export default {
 
 
 label {
+    font-family: sans-serif;
     font-size: 20px;
 }
 
@@ -75,10 +107,15 @@ input {
     gap: 1em;
 }
 
+h1 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 span,
 a {
     margin: 8px 2px;
     font-size: 18px;
+    font-family: sans-serif;
 }
 
 a:hover {
@@ -92,6 +129,7 @@ button {
     border-radius: 2px;
     padding: 1em 2em;
     margin-bottom: 4em;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 16px;
 }
 </style>

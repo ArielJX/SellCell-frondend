@@ -25,7 +25,7 @@ const router = createRouter({
       component: () => import('../views/SignupView.vue')
     },
     {
-      path: '/profile',
+      path: '/profile/:id',
       name: 'profile',
       component: () => import('../views/ProfileView.vue')
     },
@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/listProduct',
       name: 'listProduct',
       component: () => import('../views/listProductPage.vue')
+    },
+    {
+      path: '/ProductforBuyer/:id',
+      name: 'productForBuyer',
+      component: () => import('../views/ProductDetailForBuyer.vue')
     }
   ]
 })

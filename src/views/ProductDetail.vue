@@ -81,7 +81,6 @@
             </div>
 
             <form class="chat__box--form">
-                <input class="chat__box--input" placeholder="username" type="text" name="username" v-model="username">
                 <input class="chat__box--input" placeholder="type message here" type="text" name="message"
                     v-model="message">
                 <button class="send__button" @click="submitMessage" type="button">Send</button>
@@ -180,6 +179,7 @@ export default {
 <style lang="scss" scoped>
 .container {
     width: 100%;
+    padding-top: 2rem;
 }
 
 h1 {
@@ -200,10 +200,11 @@ h1 {
 
     .slider-holder {
         width: 50%;
-        min-width: 220px;
-        height: 100%;
+        min-width: 160px;
+        height: 450px;
         text-align: center;
         overflow: hidden;
+        margin-left: 4rem;
 
         .slider-image {
             width: 100%;
@@ -213,7 +214,7 @@ h1 {
     }
 
     .product-detail {
-        width: 40%;
+        width: 50%;
         max-width: 400px;
         display: flex;
         flex-direction: column;
@@ -231,15 +232,16 @@ h1 {
                     font-family: sans-serif;
                     margin-right: 1rem;
                 }
+
+                p,
+                label {
+                    margin-bottom: 3px;
+                }
             }
         }
     }
 
 }
-
-
-
-
 
 h3 {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -405,14 +407,32 @@ button {
 
     .information-box {
         gap: 1rem;
-    }
 
-    .product-detail {
-        width: 40%
+        .slider-holder {
+            height: 220px;
+            margin-left: 2.5rem;
+        }
+
+        .product-detail {
+            width: 40%
+        }
     }
 
     .detail-box {
         padding: 0;
+    }
+
+    .buttons {
+        gap: 1rem;
+
+
+    }
+
+    .edit-button,
+    .delete-button,
+    .send__button {
+        width: 50px;
+        height: 32px;
     }
 
     .chat__box {
@@ -428,6 +448,5 @@ button {
     .profile__comment {
         font-size: 12px;
     }
-
 }
 </style>

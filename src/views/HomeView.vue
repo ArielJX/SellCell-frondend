@@ -282,6 +282,7 @@ span {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  padding: 1rem 0;
 
   .btn__search {
     margin-left: 2em;
@@ -291,12 +292,18 @@ span {
   .search-bar__brand,
   .search-bar__price,
   .search-bar__location {
-    padding: 1rem;
+    padding-right: 1rem;
 
     select {
       text-decoration: none;
       display: inline-block;
       padding: 10px;
+    }
+
+    label {
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      color: white;
+      margin-right: 6px;
     }
   }
 }
@@ -386,27 +393,27 @@ span {
     justify-content: center;
     align-items: center;
     padding: 0 15%;
+  }
+}
 
-    .mobile-brands-detail {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      border-radius: .5rem;
-      padding: 3rem;
-      gap: 1.5rem;
+.mobile-brands-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: .5rem;
+  gap: 1.5rem;
+  margin-top: 1rem;
 
-      .mobile-brands-image {
-        max-width: 80px;
-        width: 80%;
-        height: auto;
+  .mobile-brands-image {
+    max-width: 80px;
+    width: 80%;
+    height: auto;
 
-        img {
-          object-fit: contain;
-          width: 100%;
-          height: 100%;
-        }
-      }
+    img {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
     }
   }
 }
@@ -453,6 +460,10 @@ span {
     &-right {
       display: none;
     }
+  }
+
+  p {
+    font-size: 12px;
   }
 }
 </style>

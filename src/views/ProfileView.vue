@@ -13,7 +13,7 @@
                 </div>
                 <div class="column-3 center">
                     <ProfileItem @delete-item="deleteItem" v-for="product of productArray" :product-data="product"
-                        :key="product.id" />
+                        :key="product._id" />
                 </div>
             </div>
         </div>
@@ -167,6 +167,7 @@ img {
     padding: 0 1rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .profile-detail {
@@ -175,11 +176,6 @@ img {
     justify-content: center;
     margin-bottom: 2rem;
 }
-
-/* .center {
-    margin: 4px auto;
-    align-self: center;
-} */
 
 .img-wrapper {
     width: 160px;
@@ -226,6 +222,7 @@ h4 {
 
 h3 {
     font-size: 26px;
+    text-align: center;
 }
 
 h4 {

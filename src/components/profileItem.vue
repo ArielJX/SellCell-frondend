@@ -1,7 +1,7 @@
 <template>
 
   <div class="item-box center">
-    <div>
+    <div class="img-wrapper">
       <img :src="`data:image/png;base64, ${image}`" alt="">
     </div>
     <div class="subtitle-container">
@@ -46,15 +46,22 @@ export default {
 <style scoped>
 .item-box {
   min-width: 220px;
-  max-width: 240px;
+  max-width: 220px;
   flex: 1 1 30%;
   border: 1px solid gainsboro;
   border-radius: 6px;
   padding-bottom: 1em;
 }
 
+.img-wrapper {
+  width: 100%;
+  height: 160px;
+}
+
 img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 6px;
 }
 

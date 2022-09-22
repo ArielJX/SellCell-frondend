@@ -2,29 +2,70 @@
 import { RouterLink, RouterView } from 'vue-router'
 
 </script>
-  
+<script>
+// import { RouterLink, RouterView } from 'vue-router'
+export default {
+  data() {
+    return {
+      LoggedIn: false,
+      LoggedOut: true
+    };
+  },
+  methods: {
+    isUserLoggedIn() {
+      if (localStorage.getItem('token') != null) {
+        this.LoggedIn = true,
+          this.LoggedOut = false
+      }
+    },
+    isUserLoggedOut() {
+      localStorage.clear();
+      this.LoggedIn = false,
+        this.LoggedOut = true
+    }
+  },
+  created() {
+    this.isUserLoggedIn,
+      this.isUserLoggedOut
+  }
+}
+function myFunction() {
+  var x = document.getElementById("mobile-nav");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
 <template>
   <div class="page-container">
-
-    <nav>
-      <img src="../src/image/logo.png" alt="logo">
-      <div id="mobile-nav">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/profile">Profile</RouterLink>
-      </div>
-      <a href="javascript:void(0);" class="icon mobile-only" @click="myFunction()">
-        <i class="fa fa-bars" style="font-size: 28px;"></i>
-      </a>
-      <div class="nav-link">
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-        <RouterLink to="/profile">Profile</RouterLink>
-      </div>
-    </nav>
-
     <div class="content-wrap">
-      <RouterView />
+      <header>
+        <nav>
+          <a href="/"><img src="../src/image/logo.png" alt="logo"></a>
+          <div id="mobile-nav">
+            <RouterLink v-if="!LoggedIn, LoggedOut" to="/">Home</RouterLink>
+            <RouterLink v-if="!LoggedIn, LoggedOut" to="/login">Login</RouterLink>
+            <RouterLink v-if="LoggedIn" to="/profile/:id">Profile</RouterLink>
+            <RouterLink v-if="!LoggedOut, LoggedIn" to="/">Log out</RouterLink>
+          </div>
+          <a href="javascript:void(0);" class="icon mobile-only" @click="myFunction()">
+            <i class="fa fa-bars" style="font-size: 28px;"></i>
+          </a>
+          <div class="nav-link">
+            <RouterLink to="/">Home</RouterLink>
+            <RouterLink v-if="!LoggedIn, LoggedOut" to="/login">Login</RouterLink>
+            <RouterLink v-if="!LoggedIn, !LoggedOut" to=" /profile/:id">Profile</RouterLink>
+            <RouterLink v-if="!LoggedOut, LoggedIn" to="/">Log out</RouterLink>
+          </div>
+        </nav>
+
+      </header>
+
+      <RouterView @UserLoggedIn="isUserLoggedIn" @UserLoggedOut="isUserLoggedOut" />
+
     </div>
     <footer>
       <ul>
@@ -40,7 +81,6 @@ import { RouterLink, RouterView } from 'vue-router'
     </footer>
   </div>
 </template>
-  
 <style lang="scss" scoped>
 img {
   width: 200px;
@@ -153,14 +193,4 @@ li {
 }
 </style>
 
-<script>
-function myFunction() {
-  var x = document.getElementById("mobile-nav");
-  if (x.style.display === "block") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
-}
-</script>
-  
+      

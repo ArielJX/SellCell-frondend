@@ -2,7 +2,7 @@
     <div class="profile">
         <div class="profile-left">
             <div class="profile-bg-wrapper">
-                <h2 class="white-h2">Welcome Back Sharon</h2>
+                <h2 class="white-h2">Welcome Back {{userObject.username}}</h2>
             </div>
             <div class="border-container">
                 <div class="title-container">
@@ -20,7 +20,7 @@
         <div class="profile-right">
             <div class="img-wrapper center"></div>
             <div class="profile-detail center">
-                <h3 class="center">Sharon Smith</h3>
+                <h3 class="center" name="username">{{userObject.username}}</h3>
                 <div class="stars center">
                     <img class="star" src="../image/star-solid.svg" alt="">
                     <img class="star" src="../image/star-solid.svg" alt="">
@@ -54,10 +54,16 @@ export default {
             name: null,
             price: null,
             location: null,
-            productArray: []
+            productArray: [],
+            userObject: {}
         };
     },
     methods: {
+        async getUser() {
+            const response = await fetch(`http://localhost:3000/login/${this.$route.params.id}`);
+            const data = await response.json();
+            this.userObject = data;
+        },
         async getItem() {
             const response = await fetch(`http://localhost:3000/products`);
             const data = await response.json();
@@ -72,10 +78,13 @@ export default {
 
         },
     },
+
     mounted() {
         this.getItem();
+        this.getUser();
+
     }
-}    
+}  
 </script>
 
 <style scoped>

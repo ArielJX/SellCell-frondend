@@ -25,6 +25,14 @@
                 <p class="description">{{productObject.description}}</p>
                 <h3>Location</h3>
                 <p class="location">{{productObject.location}}</p>
+                <div class="dropdown">
+            <button class="seller__button">Seller info</button>
+            <div class="dropdown-content">
+            <p>Username: Grace0126</p>
+            <p>Contact: Grace@hotmail.com</p>
+            <p style="color:green;">Authenticated account</p>
+            </div>
+            </div>
             </div>
         </div>
     </div>
@@ -109,6 +117,51 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$main-blue: #184DD1;
+$dark-blue: #003489;
+$white: white;
+
+@mixin btn-theme-blue {
+  display: inline-block;
+  justify-content: center;
+  margin-top: 1rem;
+  padding: 12px 1em;
+  background: $main-blue;
+  color: $white;
+  cursor: pointer;
+  border-radius: .3rem;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid white;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  &:hover {
+    background: $dark-blue;
+  }
+}
+
+@mixin btn-theme2 {
+    border: none;
+    background-color: rgba(25, 80, 218, 1);
+    color: white;
+    width: 60px;
+    height: 36px;
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+}
+
+@mixin btn-theme-green {
+    border: none;
+    background-color: #17A500;
+    color: white;
+    width: 60px;
+    height: 36px;
+    font-size: 16px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    cursor: pointer;
+}
+
 .container {
     width: 100%;
     padding-top: 2rem;
@@ -196,49 +249,15 @@ p {
     padding-top: 2em;
 }
 
-.edit-button {
-    border: none;
-    background-color: rgba(25, 80, 218, 1);
-    color: white;
-    width: 60px;
-    height: 36px;
-    font-size: 16px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    cursor: pointer;
+.edit-button, .save-button {
+@include btn-theme2;
 }
 
-.save-button {
-    border: none;
-    background-color: rgba(25, 80, 218, 1);
-    color: white;
-    width: 60px;
-    height: 36px;
-    font-size: 16px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    cursor: pointer;
+
+.delete-button, .cancel-button {
+@include btn-theme-green
 }
 
-.delete-button {
-    border: none;
-    background-color: #17A500;
-    color: white;
-    width: 60px;
-    height: 36px;
-    font-size: 16px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    cursor: pointer;
-}
-
-.cancel-button {
-    border: none;
-    background-color: #17A500;
-    color: white;
-    width: 60px;
-    height: 36px;
-    font-size: 16px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    cursor: pointer;
-}
 
 .chat__box {
     box-shadow: 3px 3px 5px 6px #ccc;
@@ -309,16 +328,7 @@ button {
 }
 
 .send__button {
-    border: none;
-    background-color: rgba(25, 80, 218, 1);
-    color: white;
-    width: 60px;
-    height: 36px;
-    margin-left: 1em;
-    font-size: 16px;
-    box-sizing: border-box;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    cursor: pointer;
+@include btn-theme-blue;
 }
 
 @media (max-width: 700px) {
@@ -381,4 +391,25 @@ button {
         font-size: 12px;
     }
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+ .seller__button {
+    @include btn-theme-blue;
+  }
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: $white;
+  width: 300px;
+  height: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: $main-blue;}
 </style>

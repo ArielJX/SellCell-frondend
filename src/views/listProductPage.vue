@@ -4,11 +4,11 @@
         <form @submit.prevent>
             <div class="product-list__name">
                 <label for="name">Product Name</label>
-                <input type="text" id="name" name="name" v-model="name">
+                <input type="text" id="name" name="name" v-model="name" required>
             </div>
             <div class="product-list__brand">
                 <label for="brand">Product Brand</label>
-                <select name="brand" id="brand" v-model="brand">
+                <select name="brand" id="brand" v-model="brand" required>
                     <option value="Apple">Apple</option>
                     <option value="Samsung">Samsung</option>
                     <option value="Huawei">Huawei</option>
@@ -18,12 +18,12 @@
             </div>
             <div class="product-list__price">
                 <label for="price">Product Price</label>
-                <input type="number" id="price" name="price" v-model="price">
+                <input type="number" id="price" name="price" v-model="price" required>
             </div>
             <div class="product-list__description">
                 <label for="description">Product Description</label>
                 <textarea type="text" id="description" name="description" v-model="description" cols="30"
-                    rows="5"></textarea>
+                    rows="5" required></textarea>
             </div>
             <div class="product-list__image">
             <label for="image">Product Image</label>
@@ -31,14 +31,14 @@
         </div>
             <div class="product-list__location">
                 <label for="location">Product Location</label>
-                <select name="location" id="location" v-model="location">
+                <select name="location" id="location" v-model="location" required>
                     <option value="Auckland">Auckland</option>
                     <option value="Hamilton">Hamilton</option>
                     <option value="Wellington">Wellington</option>
                     <option value="Christchurch">Christchurch</option>
                 </select>
             </div>
-            <button @click="submitForm" type="button">Upload</button>
+            <button @click="submitForm" type="submit">Upload</button>
         </form>
     </div>
 </template>
@@ -78,7 +78,9 @@ export default {
             });
             const data = await response.json();
             const savedItemId = data._id;
-            this.$router.push({name: 'product', params: {id: savedItemId}});
+            if ([this.name && this.price && this.location && this.brand && this.description].value !== '') {
+                this.$router.push({name: 'product', params: {id: savedItemId}});
+            } 
         },
 
     },

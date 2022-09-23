@@ -142,25 +142,12 @@ export default {
     gap: 1em;
 }
 
-.item-box {
-    max-width: 240px;
-    flex: 1 1 30%;
-    border: 1px solid gainsboro;
-    border-radius: 6px;
-    padding-bottom: 1em;
-}
 
 img {
     width: 100%;
     border-radius: 6px 6px;
 }
 
-.subtitle-container {
-    padding: 0 1em;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
 
 .profile-right {
     width: 20%;
@@ -210,9 +197,6 @@ img {
     width: 8%;
 }
 
-.mb-2 {
-    margin-bottom: 1.5em;
-}
 
 h2,
 h3,
@@ -233,9 +217,6 @@ p {
     font-size: 12px;
 }
 
-.font-blue {
-    color: blue;
-}
 
 span {
     font-size: 12px;
@@ -253,13 +234,7 @@ button:hover {
     cursor: pointer;
 }
 
-.blue-button {
-    color: white;
-    background-color: #1950DA;
-    border: none;
-    border-radius: 4px;
-    padding: 4px 1.5em;
-}
+
 
 .white-button {
     color: #1950DA;

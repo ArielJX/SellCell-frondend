@@ -52,7 +52,7 @@
                 </select>
                 <div v-if="!editing" class="buttons">
                     <button @click="editPost" class="edit-button" type="button">Edit</button>
-                    <button class="delete-button" type="button" @click="deletePost">Delete</button>
+
                 </div>
                 <div v-else class="buttons">
                     <button class="save-button" @click="updatePost" type="button">Save</button>
@@ -138,13 +138,7 @@ export default {
             this.editing = false;
         },
 
-        async deletePost() {
-            const response = await fetch(`http://localhost:3000/products/${this.$route.params.id}`, {
-                method: "DELETE"
-            });
-            const data = await response.json();
-            this.$router.push({ name: 'profile' });
-        },
+    
 
         async submitMessage() {
             console.log("submit message");
@@ -286,16 +280,7 @@ p {
     cursor: pointer;
 }
 
-.delete-button {
-    border: none;
-    background-color: #17A500;
-    color: white;
-    width: 60px;
-    height: 36px;
-    font-size: 16px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    cursor: pointer;
-}
+
 
 .cancel-button {
     border: none;

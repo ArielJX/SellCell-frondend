@@ -240,25 +240,6 @@ p {
 
 
 
-.buttons {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    margin: auto;
-    gap: 2rem;
-    padding-top: 2em;
-}
-
-.edit-button, .save-button {
-@include btn-theme2;
-}
-
-
-.delete-button, .cancel-button {
-@include btn-theme-green
-}
-
-
 .chat__box {
     box-shadow: 3px 3px 5px 6px #ccc;
     width: 100%;
@@ -364,14 +345,6 @@ button {
         padding: 0;
     }
 
-    .buttons {
-        gap: 1rem;
-
-
-    }
-
-    .edit-button,
-    .delete-button,
     .send__button {
         width: 50px;
         height: 32px;

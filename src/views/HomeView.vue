@@ -15,7 +15,7 @@
 
       </div>
       <div class="header-container__right">
-        <!-- <img class="header-banner-image" src="src/img/header-guy.jpeg"> -->
+
       </div>
     </div>
     <section class="search-bar">
@@ -61,8 +61,8 @@
       <p>Shop our unique range of mobile phones, all authenticated by our CellSell experts</p>
 
       <div class="list-product-page columns">
-        <listItemHome v-if="!showing" v-for="product of productArray" :product-data="product" />
-        <searchedProduct v-else v-for="findproduct of findproductArray" :findproduct-data="findproduct" />
+        <listItemHome v-if="!showing" v-for="product of productArray" :key="product._id" :product-data="product" />
+        <searchedProduct v-else v-for="findproduct of findproductArray" :key="findproduct._id" :findproduct-data="findproduct" />
       </div>
     </section>
 
@@ -74,7 +74,7 @@
         <button class="btn"><span>See The Process</span></button>
       </div>
       <div class="strip-banner-right"></div>
-      <!-- <img src="src/img/strip-marketplace.png"> -->
+
     </div>
 
     <div class="strip-banner__mobile-brands">
@@ -117,7 +117,7 @@
       </div>
       <div class="strip-banner-right">
         <div class="image-wrapper"></div>
-        <!-- <img src="src/img/strip-experts.png" alt=""> -->
+
       </div>
 
     </div>
@@ -171,7 +171,7 @@ export default {
   }
 }
 </script>
- -->
+
 
 <style lang="scss">
 $main-blue: #184DD1;
